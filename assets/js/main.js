@@ -119,25 +119,27 @@
     }
   }
 
-  /* ------------------------------------------------------------- animation */
-  if (canAnimate) {
-    /* Page-load sequence: whatever is marked as the opening group rises in order. */
-    var intro = document.querySelectorAll('[data-intro]');
-    if (intro.length) {
-      M.animate(intro,
-        { opacity: [0, 1], transform: ['translateY(14px)', 'translateY(0px)'] },
-        { duration: 0.7, delay: M.stagger(0.08), ease: EASE_OUT })
-        .then(function () {
-          Array.prototype.forEach.call(intro, function (el) { el.classList.add('is-shown'); });
-        });
-    }
+  /* ------------------------------------------------------------- animation
+     Exposed as window.Prayatn.reveal() so it can be re-run — the single-file
+     preview build swaps pages in and out and needs to replay the entrance. */
+  function playIntro(root) {
+    var intro = (root || document).querySelectorAll('[data-intro]');
+    if (!intro.length) return;
+    M.animate(intro,
+      { opacity: [0, 1], transform: ['translateY(14px)', 'translateY(0px)'] },
+      { duration: 0.7, delay: M.stagger(0.08), ease: EASE_OUT })
+      .then(function () {
+        Array.prototype.forEach.call(intro, function (el) { el.classList.add('is-shown'); });
+      });
+  }
 
-    /* Scroll reveals. Elements in the same [data-group] rise together, staggered. */
+  function setupReveals(root) {
+    /* Elements sharing a [data-group] rise together, one just after another. */
     var groups = {};
-    Array.prototype.forEach.call(document.querySelectorAll('.anim:not([data-intro])'), function (el) {
-      var key = el.dataset.group || null;
-      if (key) { (groups[key] = groups[key] || []).push(el); }
-      else { groups['solo-' + Math.random()] = [el]; }
+    var n = 0;
+    Array.prototype.forEach.call((root || document).querySelectorAll('.anim:not([data-intro]):not(.is-shown)'), function (el) {
+      var key = el.dataset.group || ('solo-' + (n++));
+      (groups[key] = groups[key] || []).push(el);
     });
 
     Object.keys(groups).forEach(function (key) {
@@ -151,9 +153,23 @@
           });
       }, { amount: 0.12, margin: '0px 0px -6% 0px' });
     });
+  }
+
+  window.Prayatn = {
+    reveal: function (root) {
+      if (!canAnimate) { revealAll(); return; }
+      playIntro(root);
+      setupReveals(root);
+    },
+    revealAll: revealAll
+  };
+
+  if (canAnimate) {
+    playIntro(document);
+    setupReveals(document);
 
     /* Cards lift very slightly on hover — enough to feel responsive, not bouncy. */
-    Array.prototype.forEach.call(document.querySelectorAll('.workcard'), function (card) {
+    Array.prototype.forEach.call(document.querySelectorAll('.workcard, .projectcard'), function (card) {
       card.addEventListener('mouseenter', function () {
         M.animate(card, { transform: 'translateY(-4px)' }, { duration: 0.25, ease: EASE_OUT });
       });

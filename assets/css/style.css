@@ -248,7 +248,7 @@ strong { font-weight: 650; color: var(--ink); }
   margin-top: clamp(2.25rem, 4vw, 3.25rem); position: relative;
   border-radius: var(--r-md); overflow: hidden; background: var(--stone-100);
 }
-.hero__media img { width: 100%; aspect-ratio: 21/9; object-fit: cover; }
+.hero__media img { width: 100%; height: auto; aspect-ratio: 21/9; object-fit: cover; }
 @media (max-width: 700px) { .hero__media img { aspect-ratio: 4/3; } }
 .hero__caption {
   font-family: var(--display); font-size: .8rem; color: var(--muted);
@@ -272,7 +272,7 @@ strong { font-weight: 650; color: var(--ink); }
 /* ---------- feature rows ---------- */
 .feature { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center; grid-template-columns: 1fr; }
 @media (min-width: 900px) { .feature { grid-template-columns: 1fr 1fr; } .feature--flip .feature__media { order: 2; } }
-.feature__media img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--r-md); background: var(--stone-100); }
+.feature__media img { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--r-md); background: var(--stone-100); }
 .feature__body p { max-width: var(--measure); }
 
 /* ---------- work cards ---------- */
@@ -470,3 +470,102 @@ strong { font-weight: 650; color: var(--ink); }
   .anim { opacity: 1 !important; transform: none !important; }
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* ==========================================================================
+   Picture-led components
+   The pages are meant to be looked at, not only read: these carry the work
+   visually so the writing can stay short.
+   ========================================================================== */
+
+/* full-width band of photographs, varied heights */
+.photoband { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; }
+.photoband img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--r-sm); background: var(--stone-100); }
+.photoband > * { overflow: hidden; border-radius: var(--r-sm); }
+.photoband > *:nth-child(1) { aspect-ratio: 4/5; }
+.photoband > *:nth-child(2) { aspect-ratio: 4/3; align-self: center; }
+.photoband > *:nth-child(3) { aspect-ratio: 4/3; align-self: center; }
+.photoband > *:nth-child(4) { aspect-ratio: 4/5; }
+@media (max-width: 800px) { .photoband { grid-template-columns: repeat(2, 1fr); } }
+
+/* one large photograph with a stack of smaller ones */
+.mosaic { display: grid; gap: .7rem; grid-template-columns: 1fr; }
+@media (min-width: 820px) { .mosaic { grid-template-columns: 1.7fr 1fr; } }
+.mosaic__main { overflow: hidden; border-radius: var(--r-md); }
+.mosaic__main img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3; background: var(--stone-100); }
+.mosaic__side { display: grid; gap: .7rem; grid-template-columns: 1fr 1fr; }
+@media (min-width: 820px) { .mosaic__side { grid-template-columns: 1fr; } }
+.mosaic__side > * { overflow: hidden; border-radius: var(--r-md); }
+.mosaic__side img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 3/2; background: var(--stone-100); }
+
+/* project card: photograph, a tag, a heading and two lines */
+.projectgrid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); }
+.projectcard {
+  display: flex; flex-direction: column; text-decoration: none; color: inherit;
+  border: 1px solid var(--rule); border-radius: var(--r-md); overflow: hidden; background: var(--white);
+  transition: border-color .2s ease;
+}
+.projectcard:hover { border-color: var(--green-500); color: inherit; }
+.projectcard__media { aspect-ratio: 3/2; overflow: hidden; background: var(--stone-100); position: relative; }
+.projectcard__media img { width: 100%; height: 100%; object-fit: cover; }
+.projectcard__tag {
+  position: absolute; left: .7rem; top: .7rem; background: var(--white);
+  font-family: var(--display); font-size: .68rem; font-weight: 650; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--green-700); padding: .3rem .6rem; border-radius: var(--r-xs);
+}
+.projectcard__body { padding: 1.15rem 1.2rem 1.35rem; flex: 1; display: flex; flex-direction: column; }
+.projectcard__body h3 { font-size: 1.14rem; margin-bottom: .4rem; }
+.projectcard__body p { color: var(--muted); font-size: .95rem; margin-bottom: 1rem; }
+.projectcard .arrow-link { margin-top: auto; font-size: .87rem; }
+
+/* quote set over a photograph */
+.imgquote { position: relative; border-radius: var(--r-md); overflow: hidden; min-height: 380px; display: grid; align-items: end; }
+.imgquote img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.imgquote::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,63,43,.94) 12%, rgba(10,63,43,.55) 55%, rgba(10,63,43,.25)); }
+.imgquote__body { position: relative; z-index: 1; padding: clamp(1.75rem, 4vw, 3rem); max-width: 760px; }
+.imgquote blockquote {
+  margin: 0 0 1rem; color: #fff; font-family: var(--display); font-weight: 500;
+  font-size: clamp(1.3rem, 2.8vw, 2rem); line-height: 1.3; letter-spacing: -.02em;
+}
+.imgquote cite { font-style: normal; font-family: var(--display); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--saffron-bright); font-weight: 600; }
+
+/* numbered steps, each with a picture */
+.steps { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+.step__media { aspect-ratio: 3/2; overflow: hidden; border-radius: var(--r-sm); background: var(--stone-100); margin-bottom: 1rem; }
+.step__media img { width: 100%; height: 100%; object-fit: cover; }
+.step__n {
+  display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px;
+  border-radius: 50%; background: var(--saffron-50); color: var(--saffron);
+  font-family: var(--display); font-size: .78rem; font-weight: 700; margin-bottom: .6rem;
+}
+.step h3 { font-size: 1.08rem; margin-bottom: .35rem; }
+.step p { color: var(--muted); font-size: .95rem; }
+
+/* horizontally scrolling strip of photographs */
+.strip { display: flex; align-items: flex-start; gap: .7rem; overflow-x: auto; padding-bottom: .6rem; scroll-snap-type: x mandatory; }
+.strip::-webkit-scrollbar { height: 6px; }
+.strip::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
+.strip > * { flex: 0 0 clamp(190px, 26vw, 280px); scroll-snap-align: start; border-radius: var(--r-sm); overflow: hidden; background: var(--stone-100); }
+.strip img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+
+/* a short fact or figure pulled out beside the text */
+.sidefact {
+  border-top: 2px solid var(--saffron-bright); padding-top: 1rem; margin: 2rem 0;
+}
+.sidefact b { display: block; font-family: var(--display); font-size: 2rem; font-weight: 700; color: var(--green-700); letter-spacing: -.03em; line-height: 1; }
+.sidefact span { display: block; font-family: var(--display); font-size: .9rem; color: var(--muted); margin-top: .45rem; }
+
+/* text with a picture alongside it, alternating down the page */
+.textpic { display: grid; gap: clamp(1.5rem, 3.5vw, 3rem); grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 880px) {
+  .textpic { grid-template-columns: 1fr 1fr; }
+  .textpic--flip .textpic__media { order: -1; }
+}
+.textpic__media img { width: 100%; height: auto; border-radius: var(--r-md); object-fit: cover; aspect-ratio: 4/3; background: var(--stone-100); }
+.textpic__media figcaption { font-family: var(--display); font-size: .8rem; color: var(--muted); margin-top: .6rem; }
+.textpic__body > :first-child { margin-top: 0; }
+.textpic__body p { max-width: 60ch; }
+.textpic--tall .textpic__media img { aspect-ratio: 3/4; }
+
+/* tighter reading rhythm for the long pages */
+.editorial__body h3 { margin-top: 1.9rem; }
+.editorial__body p + p { margin-top: 0; }
