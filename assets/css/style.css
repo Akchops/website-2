@@ -245,15 +245,18 @@ strong { font-weight: 650; color: var(--ink); }
 .hero h1 .hl { color: var(--green-700); }
 .hero__lede { margin-bottom: 1.9rem; }
 .hero__media {
-  margin-top: clamp(2.25rem, 4vw, 3.25rem); position: relative;
+  /* Full shorthand, so it also clears the browser's default figure margins —
+     the element must not need an inline style:margin:0 to sit correctly. */
+  margin: clamp(2.25rem, 4vw, 3.25rem) 0 0; position: relative;
   border-radius: var(--r-md); overflow: hidden; background: var(--stone-100);
 }
 .hero__media img { width: 100%; height: auto; aspect-ratio: 21/9; object-fit: cover; }
 @media (max-width: 700px) { .hero__media img { aspect-ratio: 4/3; } }
 .hero__caption {
   font-family: var(--display); font-size: .8rem; color: var(--muted);
-  margin-top: .7rem; display: flex; gap: .5rem; align-items: baseline;
+  margin-top: .7rem; display: flex; flex-wrap: wrap; gap: .15rem .5rem; align-items: baseline;
 }
+.hero__caption b { white-space: nowrap; }
 .hero__caption b { color: var(--ink); font-weight: 600; }
 
 /* fact strip under hero */
