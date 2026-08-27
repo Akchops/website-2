@@ -1,19 +1,26 @@
 # Redirects for hosts that read a _redirects file (Netlify, Cloudflare Pages).
-# Keeps links to the old website working instead of dumping people on an error.
+# Keeps links to the old website — and to earlier drafts of this one — working.
 
-/index.php            /                        301
-/about-us             /about.html              301
-/about                /about.html              301
-/education            /education.html          301
-/health               /healthcare.html         301
-/healthcare           /healthcare.html         301
-/women-develoment     /women-development.html  301
-/women-development    /women-development.html  301
-/board-details        /trustees.html           301
-/trustees             /trustees.html           301
-/gallery              /gallery.html            301
-/contact              /contact.html            301
-/contact.php          /contact.html            301
-/get-involved         /get-involved.html       301
+/index.php            /                          301
+/about-us             /about.html                301
+/about                /about.html                301
+/trustees             /about.html#governance     301
+/trustees.html        /about.html#governance     301
+/board-details        /about.html#governance     301
 
-/*                    /404.html                404
+/our-work             /our-work.html             301
+/education            /our-work.html#education   301
+/education.html       /our-work.html#education   301
+/health               /our-work.html#healthcare  301
+/healthcare           /our-work.html#healthcare  301
+/healthcare.html      /our-work.html#healthcare  301
+/women-develoment     /our-work.html#women       301
+/women-development    /our-work.html#women       301
+/women-development.html  /our-work.html#women    301
+
+/gallery              /gallery.html              301
+/get-involved         /get-involved.html         301
+/contact              /contact.html              301
+/contact.php          /contact.html              301
+
+/*                    /404.html                  404

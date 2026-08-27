@@ -6,7 +6,9 @@
   publish = "."
   command = ""
 
-# Let visitors reach pages without typing ".html"
+# Let visitors reach pages without typing ".html", and keep every address the
+# old website used — plus the ones from earlier drafts of this one — working.
+
 [[redirects]]
   from = "/about"
   to = "/about.html"
@@ -18,44 +20,73 @@
   status = 301
 
 [[redirects]]
-  from = "/education"
-  to = "/education.html"
+  from = "/trustees"
+  to = "/about.html#governance"
   status = 301
 
 [[redirects]]
-  from = "/health"
-  to = "/healthcare.html"
-  status = 301
-
-[[redirects]]
-  from = "/healthcare"
-  to = "/healthcare.html"
-  status = 301
-
-# the old site had this misspelling in its own menu
-[[redirects]]
-  from = "/women-develoment"
-  to = "/women-development.html"
-  status = 301
-
-[[redirects]]
-  from = "/women-development"
-  to = "/women-development.html"
+  from = "/trustees.html"
+  to = "/about.html#governance"
   status = 301
 
 [[redirects]]
   from = "/board-details"
-  to = "/trustees.html"
+  to = "/about.html#governance"
   status = 301
 
 [[redirects]]
-  from = "/trustees"
-  to = "/trustees.html"
+  from = "/our-work"
+  to = "/our-work.html"
+  status = 301
+
+[[redirects]]
+  from = "/education"
+  to = "/our-work.html#education"
+  status = 301
+
+[[redirects]]
+  from = "/education.html"
+  to = "/our-work.html#education"
+  status = 301
+
+[[redirects]]
+  from = "/health"
+  to = "/our-work.html#healthcare"
+  status = 301
+
+[[redirects]]
+  from = "/healthcare"
+  to = "/our-work.html#healthcare"
+  status = 301
+
+[[redirects]]
+  from = "/healthcare.html"
+  to = "/our-work.html#healthcare"
+  status = 301
+
+[[redirects]]
+  from = "/women-develoment"
+  to = "/our-work.html#women"
+  status = 301
+
+[[redirects]]
+  from = "/women-development"
+  to = "/our-work.html#women"
+  status = 301
+
+[[redirects]]
+  from = "/women-development.html"
+  to = "/our-work.html#women"
   status = 301
 
 [[redirects]]
   from = "/gallery"
   to = "/gallery.html"
+  status = 301
+
+[[redirects]]
+  from = "/get-involved"
+  to = "/get-involved.html"
   status = 301
 
 [[redirects]]
@@ -71,11 +102,6 @@
 [[redirects]]
   from = "/index.php"
   to = "/"
-  status = 301
-
-[[redirects]]
-  from = "/get-involved"
-  to = "/get-involved.html"
   status = 301
 
 # Anything else that no longer exists lands on the friendly 404 page

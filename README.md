@@ -18,15 +18,14 @@ runtime. If it ever fails to load, the pages stay complete and readable.
 | File | Page |
 | --- | --- |
 | `index.html` | Home |
-| `about.html` | About Prayatn — story, beliefs, approach, governance |
-| `education.html` | Education — Seth Vidyalaya, scholarship scheme |
-| `healthcare.html` | Healthcare — Swaasthya Kendra, School Health Program |
-| `women-development.html` | Women Development — addressing gender based violence |
-| `trustees.html` | Governance & Trustees |
+| `about.html` | About Us — story, beliefs, how we work, governance |
+| `our-work.html` | Our Work — education, healthcare, women development |
 | `gallery.html` | Photo gallery (click any photo to enlarge) |
 | `get-involved.html` | Volunteer, partner, support + enquiry form |
 | `contact.html` | Address, phone, email, map + contact form |
 | `404.html` | Page-not-found |
+
+The navigation is deliberately flat: five links and nothing nested inside them.
 
 ```
 assets/css/style.css        all styling (design tokens at the top)
