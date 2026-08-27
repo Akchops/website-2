@@ -477,16 +477,6 @@ strong { font-weight: 650; color: var(--ink); }
    visually so the writing can stay short.
    ========================================================================== */
 
-/* full-width band of photographs, varied heights */
-.photoband { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; }
-.photoband img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--r-sm); background: var(--stone-100); }
-.photoband > * { overflow: hidden; border-radius: var(--r-sm); }
-.photoband > *:nth-child(1) { aspect-ratio: 4/5; }
-.photoband > *:nth-child(2) { aspect-ratio: 4/3; align-self: center; }
-.photoband > *:nth-child(3) { aspect-ratio: 4/3; align-self: center; }
-.photoband > *:nth-child(4) { aspect-ratio: 4/5; }
-@media (max-width: 800px) { .photoband { grid-template-columns: repeat(2, 1fr); } }
-
 /* one large photograph with a stack of smaller ones */
 .mosaic { display: grid; gap: .7rem; grid-template-columns: 1fr; }
 @media (min-width: 820px) { .mosaic { grid-template-columns: 1.7fr 1fr; } }
