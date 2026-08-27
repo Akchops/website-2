@@ -20,17 +20,21 @@
   }
   if (!canAnimate) revealAll();
 
-  /* Safety net: content must never stay invisible. If anything is still hidden
-     a few seconds after load — an observer that never fired, an unusual browser,
-     a print dialog — show it. An animation that does not play is a small loss;
-     a blank page is not. */
+  /* Safety net. Content must never stay invisible: an animation that does not
+     play is a small loss, a blank section is not. Scroll observers can miss
+     elements when someone scrolls very fast (browsers coalesce those events),
+     so every so often we simply show anything that is on screen and still
+     hidden. Motion normally gets there first, well within this interval. */
   if (canAnimate) {
-    window.setTimeout(function () {
-      Array.prototype.forEach.call(document.querySelectorAll('.anim:not(.is-shown)'), function (el) {
+    var sweeps = 0;
+    var sweep = window.setInterval(function () {
+      var pending = document.querySelectorAll('.anim:not(.is-shown)');
+      Array.prototype.forEach.call(pending, function (el) {
         var r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight * 1.5) el.classList.add('is-shown');
+        if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('is-shown');
       });
-    }, 3000);
+      if (!pending.length || ++sweeps > 120) window.clearInterval(sweep);
+    }, 1200);
     window.addEventListener('beforeprint', revealAll);
   }
 

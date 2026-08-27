@@ -3,16 +3,22 @@
 A new website for **Prayatn**, a registered Public Charitable Trust working with
 disadvantaged communities in Kalkaji, New Delhi since 1992.
 
-Plain HTML, CSS and JavaScript — no frameworks, no build step, no dependencies.
-Open any `.html` file in a browser and it works. That keeps it fast, free to
-host anywhere, and easy for anyone to maintain years from now.
+Plain HTML, CSS and JavaScript — no frameworks and no build step. Open any
+`.html` file in a browser and it works. That keeps it fast, free to host
+anywhere, and easy for anyone to maintain years from now.
+
+Animation uses [Motion](https://motion.dev) (MIT), vendored locally at
+`assets/js/vendor/motion.min.js` so the site has no external dependencies at
+runtime. If it ever fails to load, the pages stay complete and readable.
+
+**To put this live on prayatnonline.org, follow [DEPLOY.md](DEPLOY.md).**
 
 ## Pages
 
 | File | Page |
 | --- | --- |
 | `index.html` | Home |
-| `about.html` | About Prayatn — story, mission, approach, governance |
+| `about.html` | About Prayatn — story, beliefs, approach, governance |
 | `education.html` | Education — Seth Vidyalaya, scholarship scheme |
 | `healthcare.html` | Healthcare — Swaasthya Kendra, School Health Program |
 | `women-development.html` | Women Development — addressing gender based violence |
@@ -23,9 +29,12 @@ host anywhere, and easy for anyone to maintain years from now.
 | `404.html` | Page-not-found |
 
 ```
-assets/css/style.css   all styling (design tokens at the top)
-assets/js/main.js      menu, gallery lightbox, forms, animations
-assets/img/            images — currently placeholders
+assets/css/style.css        all styling (design tokens at the top)
+assets/js/main.js           menu, lightbox, forms, animation
+assets/js/vendor/           Motion, vendored (MIT)
+assets/img/                 images — currently placeholders
+netlify.toml, _redirects    hosting config and old-URL redirects
+DEPLOY.md                   how to publish on prayatnonline.org
 ```
 
 ## Viewing it locally
