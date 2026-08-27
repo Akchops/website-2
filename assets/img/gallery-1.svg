@@ -1,8 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800" role="img" aria-label="Photograph">
-  <defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7A3E1E"/><stop offset="1" stop-color="#C9700A"/></linearGradient>
-  <pattern id="p3" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><circle cx="4" cy="4" r="1.5" fill="#fff" opacity=".14"/></pattern></defs>
-  <rect width="800" height="800" fill="url(#g3)"/><rect width="800" height="800" fill="url(#p3)"/>
-  <g fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="2.5" stroke-linecap="round">
-    <path d="M378.0 412.0 q22 -30 44 0"/><circle cx="400.0" cy="384.0" r="9"/></g>
-  <text x="400.0" y="440.0" text-anchor="middle" font-family="Archivo, Segoe UI, sans-serif" font-size="14" letter-spacing="1.8" fill="#fff" fill-opacity=".72">PHOTOGRAPH</text>
+  <rect width="800" height="800" fill="#EDF0EA"/>
+  <rect x="0.5" y="0.5" width="799" height="799" fill="none" stroke="#DCE2D8"/>
+  <g transform="translate(400.0, 388.0)" fill="none" stroke="#AEBBB3" stroke-width="4.4" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="-80.0" y="-60.0" width="160.0" height="120.0" rx="11.200000000000001"/>
+    <path d="M-60.0 32.0 L-12.0 -20.0 L28.0 32.0"/>
+    <path d="M12.0 32.0 L40.0 4.0 L62.400000000000006 32.0"/>
+    <circle cx="36.0" cy="-30.4" r="10.4"/>
+  </g>
+  <text x="400.0" y="540.0" text-anchor="middle" font-family="Archivo, Segoe UI, sans-serif" font-size="25.6" letter-spacing="1.6" fill="#9AA79F">PHOTOGRAPH</text>
 </svg>

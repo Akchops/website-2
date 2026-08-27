@@ -77,12 +77,13 @@
       <div class="header-cta">
         <a class="btn btn--accent" href="get-involved.html">Get Involved</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
-          <span class="icon-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></span>
-          <span class="icon-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+          <span class="nav-toggle__bars" aria-hidden="true"><i></i><i></i><i></i></span>
         </button>
       </div>
     </div>
   </header>
+  <button class="nav-backdrop" type="button" tabindex="-1" aria-hidden="true"></button>
+  <div class="page-veil" aria-hidden="true"></div>
   <main id="main">
     <section class="hero">
       <div class="wrap">
@@ -98,7 +99,7 @@
         <figure class="hero__media anim" data-intro>
           <!-- TODO: a wide photograph, about 2000x900. This is the first thing anyone
                sees — it should be your best picture. -->
-          <img src="assets/img/hero-main.svg" alt="Children at a Prayatn programme in Kalkaji, New Delhi" width="2000" height="900">
+          <img class="reveal-img" src="assets/img/hero-main.svg" alt="Children at a Prayatn programme in Kalkaji, New Delhi" width="2000" height="900">
         </figure>
         <p class="hero__caption anim" data-intro><b>Kalkaji, New Delhi.</b> Education, healthcare and women&rsquo;s development, in one neighbourhood.</p>
       </div>
@@ -130,7 +131,7 @@
           <a class="arrow-link" href="about.html">More about Prayatn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
         <figure class="textpic__media anim" data-group="who" style="margin:0">
-          <img src="assets/img/community-1.svg" alt="Community members outside the Prayatn office" width="1000" height="750" loading="lazy">
+          <img class="reveal-img" src="assets/img/community-1.svg" alt="Community members outside the Prayatn office" width="1000" height="750" loading="lazy">
           <figcaption>Our office and our work are in the same neighbourhood.</figcaption>
         </figure>
       </div>
@@ -147,7 +148,7 @@
         </div>
         <div class="grid grid--3">
           <a class="workcard anim" data-group="work" href="our-work.html#education">
-            <div class="workcard__media"><img src="assets/img/education.svg" alt="A classroom at Seth Vidyalaya" width="900" height="620" loading="lazy"></div>
+            <div class="workcard__media"><img class="reveal-img" src="assets/img/education.svg" alt="A classroom at Seth Vidyalaya" width="900" height="620" loading="lazy"></div>
             <div class="workcard__body">
               <h3>Education</h3>
               <p>A school in the community, and support for students who would otherwise have to stop.</p>
@@ -159,7 +160,7 @@
             </div>
           </a>
           <a class="workcard anim" data-group="work" href="our-work.html#healthcare">
-            <div class="workcard__media"><img src="assets/img/healthcare.svg" alt="A health check-up at Swaasthya Kendra" width="900" height="620" loading="lazy"></div>
+            <div class="workcard__media"><img class="reveal-img" src="assets/img/healthcare.svg" alt="A health check-up at Swaasthya Kendra" width="900" height="620" loading="lazy"></div>
             <div class="workcard__body">
               <h3>Healthcare</h3>
               <p>Everyday care close to home, and health programmes that reach children in school.</p>
@@ -171,7 +172,7 @@
             </div>
           </a>
           <a class="workcard anim" data-group="work" href="our-work.html#women">
-            <div class="workcard__media"><img src="assets/img/women.svg" alt="A women&rsquo;s group meeting" width="900" height="620" loading="lazy"></div>
+            <div class="workcard__media"><img class="reveal-img" src="assets/img/women.svg" alt="A women&rsquo;s group meeting" width="900" height="620" loading="lazy"></div>
             <div class="workcard__body">
               <h3>Women Development</h3>
               <p>Care and support for women survivors of violence, inside the community itself.</p>
@@ -193,7 +194,7 @@
         </div>
         <div class="projectgrid anim" data-group="proj">
           <a class="projectcard" href="our-work.html#healthcare">
-            <div class="projectcard__media"><img src="assets/img/clinic-1.svg" alt="Inside Swaasthya Kendra" width="1000" height="750" loading="lazy"><span class="projectcard__tag">Healthcare</span></div>
+            <div class="projectcard__media"><img class="reveal-img" src="assets/img/clinic-1.svg" alt="Inside Swaasthya Kendra" width="1000" height="750" loading="lazy"><span class="projectcard__tag">Healthcare</span></div>
             <div class="projectcard__body">
               <h3>Swaasthya Kendra</h3>
               <p>Our community health centre &mdash; everyday care, within walking distance.</p>
@@ -201,7 +202,7 @@
             </div>
           </a>
           <a class="projectcard" href="our-work.html#healthcare">
-            <div class="projectcard__media"><img src="assets/img/clinic-2.svg" alt="A school health check-up" width="800" height="1000" loading="lazy"><span class="projectcard__tag">Healthcare</span></div>
+            <div class="projectcard__media"><img class="reveal-img" src="assets/img/clinic-2.svg" alt="A school health check-up" width="800" height="1000" loading="lazy"><span class="projectcard__tag">Healthcare</span></div>
             <div class="projectcard__body">
               <h3>School Health Program</h3>
               <p>Check-ups, awareness and follow-up care, taken into the classroom.</p>
@@ -209,7 +210,7 @@
             </div>
           </a>
           <a class="projectcard" href="our-work.html#education">
-            <div class="projectcard__media"><img src="assets/img/school-1.svg" alt="Children at Seth Vidyalaya" width="1000" height="750" loading="lazy"><span class="projectcard__tag">Education</span></div>
+            <div class="projectcard__media"><img class="reveal-img" src="assets/img/school-1.svg" alt="Children at Seth Vidyalaya" width="1000" height="750" loading="lazy"><span class="projectcard__tag">Education</span></div>
             <div class="projectcard__body">
               <h3>Seth Vidyalaya</h3>
               <p>Our school &mdash; for many children, the first in their family to attend one.</p>
@@ -217,7 +218,7 @@
             </div>
           </a>
           <a class="projectcard" href="our-work.html#education">
-            <div class="projectcard__media"><img src="assets/img/school-2.svg" alt="A student studying" width="800" height="1000" loading="lazy"><span class="projectcard__tag">Education</span></div>
+            <div class="projectcard__media"><img class="reveal-img" src="assets/img/school-2.svg" alt="A student studying" width="800" height="1000" loading="lazy"><span class="projectcard__tag">Education</span></div>
             <div class="projectcard__body">
               <h3>Scholarship Scheme</h3>
               <p>So that money is never the reason a promising student stops.</p>
@@ -225,7 +226,7 @@
             </div>
           </a>
           <a class="projectcard" href="our-work.html#women">
-            <div class="projectcard__media"><img src="assets/img/women-1.svg" alt="A women&rsquo;s support meeting" width="1000" height="750" loading="lazy"><span class="projectcard__tag">Women</span></div>
+            <div class="projectcard__media"><img class="reveal-img" src="assets/img/women-1.svg" alt="A women&rsquo;s support meeting" width="1000" height="750" loading="lazy"><span class="projectcard__tag">Women</span></div>
             <div class="projectcard__body">
               <h3>Addressing GBV in Communities</h3>
               <p>Comprehensive care and support for women survivors of violence.</p>
@@ -238,45 +239,10 @@
 
     <section class="section">
       <div class="wrap">
-        <figure class="imgquote anim" data-group="quote" style="margin:0">
-          <img src="assets/img/quote-bg.svg" alt="Community members at a Prayatn programme" width="1600" height="900" loading="lazy">
-          <div class="imgquote__body">
-            <blockquote>Everyone should be an equal and active partner in the journey of development &mdash; not a beneficiary of someone else&rsquo;s.</blockquote>
-            <cite>Prayatn &middot; working since 1992</cite>
-          </div>
+        <figure class="quoteblock anim" data-group="quote" style="margin:0">
+          <blockquote>Everyone should be an equal and active partner in the journey of development &mdash; not a beneficiary of someone else&rsquo;s.</blockquote>
+          <cite>Prayatn &middot; working since 1992</cite>
         </figure>
-      </div>
-    </section>
-
-    <section class="section section--stone">
-      <div class="wrap">
-        <div class="section-head anim" data-group="help">
-          <span class="label">How to help</span>
-          <h2>Three ways to be part of it</h2>
-        </div>
-        <div class="steps anim" data-group="help">
-          <div class="step">
-            <div class="step__media"><img src="assets/img/involved-1.svg" alt="A volunteer teaching a class" width="1000" height="700" loading="lazy"></div>
-            <span class="step__n">1</span>
-            <h3>Give an hour a week</h3>
-            <p>Teach, tutor, help at a health camp. Coming back regularly matters more than anything else.</p>
-          </div>
-          <div class="step">
-            <div class="step__media"><img src="assets/img/women-2.svg" alt="A skills training session" width="800" height="1000" loading="lazy"></div>
-            <span class="step__n">2</span>
-            <h3>Share what you know</h3>
-            <p>Doctors, counsellors, teachers, lawyers, trainers &mdash; professional time goes a very long way here.</p>
-          </div>
-          <div class="step">
-            <div class="step__media"><img src="assets/img/community-2.svg" alt="Children with new school books" width="900" height="900" loading="lazy"></div>
-            <span class="step__n">3</span>
-            <h3>Support a student</h3>
-            <p>Back a child through a school year, or give books, uniforms and materials.</p>
-          </div>
-        </div>
-        <div class="btn-row anim" data-group="help" style="margin-top:2rem">
-          <a class="btn btn--primary" href="get-involved.html">All the ways to help <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </div>
       </div>
     </section>
 
@@ -287,33 +253,17 @@
           <h2>Ordinary days, over thirty years</h2>
         </div>
         <div class="strip anim" data-group="gal">
-          <div><img src="assets/img/gallery-1.svg" alt="Prayatn programme photograph 1" width="800" height="800" loading="lazy"></div>
-          <div><img src="assets/img/gallery-2.svg" alt="Prayatn programme photograph 2" width="800" height="800" loading="lazy"></div>
-          <div><img src="assets/img/gallery-3.svg" alt="Prayatn programme photograph 3" width="800" height="800" loading="lazy"></div>
-          <div><img src="assets/img/gallery-4.svg" alt="Prayatn programme photograph 4" width="800" height="800" loading="lazy"></div>
-          <div><img src="assets/img/gallery-5.svg" alt="Prayatn programme photograph 5" width="800" height="800" loading="lazy"></div>
-          <div><img src="assets/img/gallery-6.svg" alt="Prayatn programme photograph 6" width="800" height="800" loading="lazy"></div>
-          <div><img src="assets/img/gallery-7.svg" alt="Prayatn programme photograph 7" width="800" height="800" loading="lazy"></div>
-          <div><img src="assets/img/gallery-8.svg" alt="Prayatn programme photograph 8" width="800" height="800" loading="lazy"></div>
+          <div><img class="reveal-img" src="assets/img/gallery-1.svg" alt="Prayatn programme photograph 1" width="800" height="800" loading="lazy"></div>
+          <div><img class="reveal-img" src="assets/img/gallery-2.svg" alt="Prayatn programme photograph 2" width="800" height="800" loading="lazy"></div>
+          <div><img class="reveal-img" src="assets/img/gallery-3.svg" alt="Prayatn programme photograph 3" width="800" height="800" loading="lazy"></div>
+          <div><img class="reveal-img" src="assets/img/gallery-4.svg" alt="Prayatn programme photograph 4" width="800" height="800" loading="lazy"></div>
+          <div><img class="reveal-img" src="assets/img/gallery-5.svg" alt="Prayatn programme photograph 5" width="800" height="800" loading="lazy"></div>
+          <div><img class="reveal-img" src="assets/img/gallery-6.svg" alt="Prayatn programme photograph 6" width="800" height="800" loading="lazy"></div>
+          <div><img class="reveal-img" src="assets/img/gallery-7.svg" alt="Prayatn programme photograph 7" width="800" height="800" loading="lazy"></div>
+          <div><img class="reveal-img" src="assets/img/gallery-8.svg" alt="Prayatn programme photograph 8" width="800" height="800" loading="lazy"></div>
         </div>
         <div class="btn-row anim" data-group="gal" style="margin-top:1.5rem">
           <a class="btn btn--ghost" href="gallery.html">See the gallery <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--stone section--tight">
-      <div class="wrap">
-        <div class="section-head anim" data-group="partners" style="margin-bottom:1.5rem">
-          <span class="label">Our partners</span>
-          <h2>We do not do this alone</h2>
-        </div>
-        <div class="partners anim" data-group="partners">
-          <div class="partner">Seth Foundation</div>
-          <div class="partner">Azim Premji Foundation</div>
-          <div class="partner">Samrat Offset Pvt Ltd</div>
-          <div class="partner">United Way of Delhi</div>
-          <div class="partner">Sleep Well Foundation</div>
         </div>
       </div>
     </section>

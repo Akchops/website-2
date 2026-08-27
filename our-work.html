@@ -56,12 +56,13 @@
       <div class="header-cta">
         <a class="btn btn--accent" href="get-involved.html">Get Involved</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
-          <span class="icon-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></span>
-          <span class="icon-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+          <span class="nav-toggle__bars" aria-hidden="true"><i></i><i></i><i></i></span>
         </button>
       </div>
     </div>
   </header>
+  <button class="nav-backdrop" type="button" tabindex="-1" aria-hidden="true"></button>
+  <div class="page-veil" aria-hidden="true"></div>
   <main id="main">
     <section class="page-head">
       <div class="wrap">
@@ -82,7 +83,7 @@
                family enrols a child, and who is eligible for a scholarship. -->
         </div>
         <figure class="textpic__media anim" data-group="education" style="margin:0">
-          <img src="assets/img/school-1.svg" alt="Children at Seth Vidyalaya" width="1000" height="750" loading="lazy">
+          <img class="reveal-img" src="assets/img/school-1.svg" alt="Children at Seth Vidyalaya" width="1000" height="750" loading="lazy">
           <figcaption>Seth Vidyalaya, in the community it serves.</figcaption>
         </figure>
       </div>
@@ -98,7 +99,7 @@
           <p>Alongside it, a <strong>Parent Teacher Association</strong> keeps parents involved in what happens day to day. For parents who did not finish school themselves, sitting on a committee that governs their child&rsquo;s education is not a small thing.</p>
         </div>
         <figure class="textpic__media anim" data-group="school" style="margin:0">
-          <img src="assets/img/school-2.svg" alt="A parent teacher meeting" width="1000" height="750" loading="lazy">
+          <img class="reveal-img" src="assets/img/school-2.svg" alt="A parent teacher meeting" width="1000" height="750" loading="lazy">
         </figure>
       </div>
       </div>
@@ -106,12 +107,9 @@
 
     <section class="section">
       <div class="wrap">
-        <figure class="imgquote anim" data-group="quote" style="margin:0">
-          <img src="assets/img/band-2.svg" alt="Children in a classroom" width="1600" height="900" loading="lazy">
-          <div class="imgquote__body">
-            <blockquote>The children here are often the first in their families to finish school. That changes what the next generation believes is possible.</blockquote>
-            <cite>Prayatn &middot; education</cite>
-          </div>
+        <figure class="quoteblock anim" data-group="quote" style="margin:0">
+          <blockquote>The children here are often the first in their families to finish school. That changes what the next generation believes is possible.</blockquote>
+          <cite>Prayatn &middot; education</cite>
         </figure>
       </div>
     </section>
@@ -129,7 +127,7 @@
                services offered, and whether there is a fee. -->
         </div>
         <figure class="textpic__media anim" data-group="healthcare" style="margin:0">
-          <img src="assets/img/clinic-1.svg" alt="A consultation at Swaasthya Kendra" width="1000" height="750" loading="lazy">
+          <img class="reveal-img" src="assets/img/clinic-1.svg" alt="A consultation at Swaasthya Kendra" width="1000" height="750" loading="lazy">
         </figure>
       </div>
       </div>
@@ -145,7 +143,7 @@
           <p>Because Prayatn runs both a school and a health service, a problem noticed in a classroom gets dealt with rather than merely observed.</p>
         </div>
         <figure class="textpic__media anim" data-group="schoolhealth" style="margin:0">
-          <img src="assets/img/clinic-2.svg" alt="A school health check-up" width="1000" height="750" loading="lazy">
+          <img class="reveal-img" src="assets/img/clinic-2.svg" alt="A school health check-up" width="1000" height="750" loading="lazy">
         </figure>
       </div>
       </div>
@@ -153,12 +151,9 @@
 
     <section class="section">
       <div class="wrap">
-        <figure class="imgquote anim" data-group="quote" style="margin:0">
-          <img src="assets/img/quote-bg.svg" alt="A health check-up in progress" width="1600" height="900" loading="lazy">
-          <div class="imgquote__body">
-            <blockquote>A child who cannot see the blackboard is not a slow learner. Running a school and a health centre together is how we notice.</blockquote>
-            <cite>Prayatn &middot; healthcare</cite>
-          </div>
+        <figure class="quoteblock anim" data-group="quote" style="margin:0">
+          <blockquote>A child who cannot see the blackboard is not a slow learner. Running a school and a health centre together is how we notice.</blockquote>
+          <cite>Prayatn &middot; healthcare</cite>
         </figure>
       </div>
     </section>
@@ -178,7 +173,7 @@
                reading this needs to know exactly what to do next. -->
         </div>
         <figure class="textpic__media anim" data-group="women" style="margin:0">
-          <img src="assets/img/women-1.svg" alt="A women&rsquo;s support meeting" width="1000" height="750" loading="lazy">
+          <img class="reveal-img" src="assets/img/women-1.svg" alt="A women&rsquo;s support meeting" width="1000" height="750" loading="lazy">
         </figure>
       </div>
       </div>
@@ -195,7 +190,7 @@
                work — what is taught, who can join, and what women have gone on to do. -->
         </div>
         <figure class="textpic__media anim" data-group="skills" style="margin:0">
-          <img src="assets/img/women-2.svg" alt="A skills training session" width="1000" height="750" loading="lazy">
+          <img class="reveal-img" src="assets/img/women-2.svg" alt="A skills training session" width="1000" height="750" loading="lazy">
         </figure>
       </div>
       </div>

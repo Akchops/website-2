@@ -56,12 +56,13 @@
       <div class="header-cta">
         <a class="btn btn--accent" href="get-involved.html">Get Involved</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
-          <span class="icon-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></span>
-          <span class="icon-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+          <span class="nav-toggle__bars" aria-hidden="true"><i></i><i></i><i></i></span>
         </button>
       </div>
     </div>
   </header>
+  <button class="nav-backdrop" type="button" tabindex="-1" aria-hidden="true"></button>
+  <div class="page-veil" aria-hidden="true"></div>
   <main id="main">
     <section class="page-head">
       <div class="wrap">
@@ -82,7 +83,7 @@
                changed since. It would be the strongest thing on this website. -->
         </div>
         <figure class="textpic__media anim" data-group="story" style="margin:0">
-          <img src="assets/img/story.svg" alt="Prayatn in its early years" width="1000" height="750" loading="lazy">
+          <img class="reveal-img" src="assets/img/story.svg" alt="Prayatn in its early years" width="1000" height="750" loading="lazy">
           <figcaption>Prayatn has worked in the same neighbourhoods since 1992.</figcaption>
         </figure>
       </div>
@@ -100,7 +101,7 @@
           <p><strong>Staying matters.</strong> Development does not happen in project cycles. It happens over the fifteen years it takes a child to grow up.</p>
         </div>
         <figure class="textpic__media anim" data-group="beliefs" style="margin:0">
-          <img src="assets/img/about.svg" alt="A community meeting at Prayatn" width="1000" height="750" loading="lazy">
+          <img class="reveal-img" src="assets/img/about.svg" alt="A community meeting at Prayatn" width="1000" height="750" loading="lazy">
         </figure>
       </div>
       </div>
@@ -155,7 +156,7 @@
           <p><a href="contact.html">Visitors are welcome</a> &mdash; do call ahead.</p>
         </div>
         <figure class="textpic__media anim" data-group="where" style="margin:0">
-          <img src="assets/img/community-2.svg" alt="The neighbourhood around the Prayatn office" width="1000" height="750" loading="lazy">
+          <img class="reveal-img" src="assets/img/community-2.svg" alt="The neighbourhood around the Prayatn office" width="1000" height="750" loading="lazy">
         </figure>
       </div>
       </div>
@@ -205,9 +206,25 @@
           <p style="margin-top:1.5rem">You are welcome to ask for our annual report and audited accounts, to visit the school and the health centre, and to talk to the trustees. <a href="contact.html">Write or call</a> and we will arrange a time.</p>
         </div>
         <figure class="textpic__media anim" data-group="trustdetails" style="margin:0">
-          <img src="assets/img/trustees-1.svg" alt="A trustees&rsquo; meeting" width="1000" height="750" loading="lazy">
+          <img class="reveal-img" src="assets/img/trustees-1.svg" alt="A trustees&rsquo; meeting" width="1000" height="750" loading="lazy">
         </figure>
       </div>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="wrap">
+        <div class="section-head anim" data-group="partners" style="margin-bottom:1.5rem">
+          <span class="label">Our partners</span>
+          <h2>We do not do this alone</h2>
+        </div>
+        <div class="partners anim" data-group="partners">
+          <div class="partner">Seth Foundation</div>
+          <div class="partner">Azim Premji Foundation</div>
+          <div class="partner">Samrat Offset Pvt Ltd</div>
+          <div class="partner">United Way of Delhi</div>
+          <div class="partner">Sleep Well Foundation</div>
+        </div>
       </div>
     </section>
 

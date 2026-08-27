@@ -1,8 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" width="900" height="620" role="img" aria-label="Health centre">
-  <defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E5A3C"/><stop offset="1" stop-color="#2E8B63"/></linearGradient>
-  <pattern id="p2" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><circle cx="4" cy="4" r="1.5" fill="#fff" opacity=".14"/></pattern></defs>
-  <rect width="900" height="620" fill="url(#g2)"/><rect width="900" height="620" fill="url(#p2)"/>
-  <g fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="2.5" stroke-linecap="round">
-    <path d="M428.0 322.0 q22 -30 44 0"/><circle cx="450.0" cy="294.0" r="9"/></g>
-  <text x="450.0" y="350.0" text-anchor="middle" font-family="Archivo, Segoe UI, sans-serif" font-size="14" letter-spacing="1.8" fill="#fff" fill-opacity=".72">HEALTH CENTRE</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" width="900" height="620" role="img" aria-label="Photograph">
+  <rect width="900" height="620" fill="#EDF0EA"/>
+  <rect x="0.5" y="0.5" width="899" height="619" fill="none" stroke="#DCE2D8"/>
+  <g transform="translate(450.0, 300.7)" fill="none" stroke="#AEBBB3" stroke-width="3.41" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="-62.0" y="-46.5" width="124.0" height="93.0" rx="8.680000000000001"/>
+    <path d="M-46.5 24.8 L-9.299999999999999 -15.5 L21.7 24.8"/>
+    <path d="M9.299999999999999 24.8 L31.0 3.1 L48.36 24.8"/>
+    <circle cx="27.900000000000002" cy="-23.56" r="8.06"/>
+  </g>
+  <text x="450.0" y="418.5" text-anchor="middle" font-family="Archivo, Segoe UI, sans-serif" font-size="19.84" letter-spacing="1.6" fill="#9AA79F">PHOTOGRAPH</text>
 </svg>
