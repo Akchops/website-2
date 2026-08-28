@@ -12,6 +12,29 @@ You need two things before starting:
 
 ---
 
+## Quickest option: a link to send for review (5 minutes)
+
+If all you need right now is a web address your grandmother can open — no
+account, no sign-in, nothing to install — use GitHub Pages. This repository is
+public, so it is free.
+
+1. Merge the open pull request into `main` (or skip this and pick the working
+   branch in step 3 instead).
+2. On github.com open the repository → **Settings** → **Pages**.
+3. Under **Build and deployment**, set Source to **Deploy from a branch**,
+   choose branch **main** and folder **/ (root)**, then **Save**.
+4. Wait two or three minutes. The address will be:
+
+   **https://akchops.github.io/website-2/**
+
+Anyone with that link can open the site on any device. Send it to her as it is.
+
+This is only for review — it does not use the redirect rules in this
+repository, so the old website's addresses would not forward. For the real
+thing on prayatnonline.org, follow the steps below.
+
+---
+
 ## Step 1 — Publish the site (10 minutes)
 
 We will use **Netlify**. It is free, it gives the site HTTPS (the padlock in the
