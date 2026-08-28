@@ -104,6 +104,21 @@
   to = "/"
   status = 301
 
+[[redirects]]
+  from = "/donate"
+  to = "/donate.html"
+  status = 301
+
+[[redirects]]
+  from = "/donation"
+  to = "/donate.html"
+  status = 301
+
+[[redirects]]
+  from = "/support"
+  to = "/donate.html"
+  status = 301
+
 # Anything else that no longer exists lands on the friendly 404 page
 [[redirects]]
   from = "/*"

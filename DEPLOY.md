@@ -103,6 +103,59 @@ following an old link still lands somewhere sensible in the meantime.
 
 ---
 
+## Setting up donations
+
+The Donate page is built and in the menu, but no payment details are in it yet
+— on purpose. Nothing on that page is invented: no account number, no UPI ID,
+no payment link. Until real details are added, the page asks people to call or
+email instead, which is true and works today.
+
+Everything lives in one place: the `DONATION` block at the top of the generator
+(and, if you edit the HTML directly, on `donate.html`). Fill in whatever exists
+and the page builds itself around it. Anything left blank is simply not shown.
+
+### Getting a payment link that works
+
+This has to be done by the trust, because it needs the trust's own bank account
+and identity documents. Nobody else can do it for you.
+
+**Razorpay** is the usual choice for Indian charities and does not need a
+developer:
+
+1. Go to **https://razorpay.com** and sign up as a **non-profit / NGO**.
+2. Complete KYC. You will need the trust deed, PAN, the trust's bank account
+   details, and address proof. Approval usually takes a few working days.
+3. Registered charities get a reduced transaction fee — ask their support to
+   apply the NGO rate.
+4. Inside Razorpay choose **Payment Links** or **Payment Pages**, create one
+   for donations, and copy the address it gives you.
+5. Paste that address into `payment_link` in the `DONATION` block.
+
+Alternatives: **Instamojo** (simpler, slightly higher fees) or **Give.do**
+(built for Indian non-profits, handles 80G receipts for you).
+
+### UPI
+
+If the trust already has a UPI ID on its bank account, put it in `upi_id`. The
+page will show it and add a button that opens the donor's UPI app on a phone.
+This is free — no transaction fee — so it is worth having even alongside a
+payment link.
+
+### 80G
+
+Put the 80G registration number in `tax_80g` and the trust's PAN in `pan`, and
+they appear on the Donate page. Most Indian donors look for these before
+giving, so this is worth chasing if the registration exists but the number is
+not to hand.
+
+### Before you publish real details
+
+Check every character of the account number, IFSC and UPI ID against a bank
+statement — not from memory, and not from an old document. A wrong digit sends
+donations to a stranger.
+
+---
+
 ## Making the contact forms send email
 
 Until this is done, the forms open the visitor's own email app with the message
