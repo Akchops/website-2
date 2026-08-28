@@ -170,7 +170,13 @@ strong { font-weight: 650; color: var(--ink); }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 74px; }
 
 .brand { display: inline-flex; align-items: center; gap: .7rem; text-decoration: none; color: var(--ink); }
-.brand__mark { width: 40px; height: 40px; flex: none; }
+.brand__mark {
+  /* the registered mark is wider than it is tall, so height drives the size */
+  height: 40px; width: auto; flex: none;
+}
+.site-header.is-condensed .brand__mark { height: 34px; }
+/* the mark is dark ink; on the green footer it has to be reversed out to white */
+.site-footer .brand__mark { height: 44px; filter: brightness(0) invert(1); }
 .brand__name { font-family: var(--display); font-size: 1.42rem; font-weight: 700; line-height: 1; letter-spacing: -.025em; color: var(--green-900); }
 .brand__sub { display: block; font-family: var(--display); font-size: .63rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-top: .3rem; }
 
