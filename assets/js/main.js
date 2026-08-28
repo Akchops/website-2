@@ -24,15 +24,26 @@
      elements when someone scrolls very fast, so periodically show anything on
      screen that is still hidden. Motion normally gets there first. */
   if (canAnimate) {
-    var sweeps = 0;
-    var sweep = window.setInterval(function () {
-      var pending = document.querySelectorAll('.anim:not(.is-shown), .reveal-img:not(.is-shown)');
-      Array.prototype.forEach.call(pending, function (el) {
+    /* Safety net. Reveals re-arm as you scroll, so an element being hidden is
+       normal — only something hidden while sitting on screen across two
+       consecutive checks is actually stuck, and gets shown outright. */
+    var stuck = new WeakMap();
+    window.setInterval(function () {
+      Array.prototype.forEach.call(document.querySelectorAll('.anim, .reveal-img'), function (el) {
         var r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('is-shown');
+        var onScreen = r.top < window.innerHeight * 0.85 && r.bottom > window.innerHeight * 0.15;
+        var hidden = parseFloat(getComputedStyle(el).opacity) < 0.05;
+        if (!onScreen || !hidden) { stuck.set(el, 0); return; }
+        var count = (stuck.get(el) || 0) + 1;
+        stuck.set(el, count);
+        if (count >= 2) {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          el.style.clipPath = 'none';
+          el.classList.add('is-shown');
+        }
       });
-      if (!pending.length || ++sweeps > 120) window.clearInterval(sweep);
-    }, 1200);
+    }, 2000);
     window.addEventListener('beforeprint', revealAll);
   }
 
@@ -92,49 +103,126 @@
   }
 
   /* =====================================================================
-     Scroll reveals
+     Scroll reveals — these re-arm, so they play every time something comes
+     back into view, and they enter from the direction you are scrolling from:
+     travelling down, things rise from below; travelling up, they settle from
+     above. Elements only re-arm once they are fully off screen, so nothing
+     flickers mid-scroll.
      ===================================================================== */
+  var scrollDir = 'down';
+  var lastY = window.scrollY;
+  window.addEventListener('scroll', function () {
+    var y = window.scrollY;
+    if (Math.abs(y - lastY) > 4) {
+      scrollDir = y > lastY ? 'down' : 'up';
+      lastY = y;
+    }
+  }, { passive: true });
+
+  function offset() { return scrollDir === 'down' ? 26 : -26; }
+
+  function hide(el) {
+    el.classList.remove('is-shown');
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(' + offset() + 'px)';
+  }
+
+  function show(els) {
+    var from = offset();   // read the direction now, as it enters
+    els.forEach(function (el) {
+      if (el.classList.contains('is-shown')) return;
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(' + from + 'px)';
+    });
+    return M.animate(els,
+      { opacity: [0, 1], transform: ['translateY(' + from + 'px)', 'translateY(0px)'] },
+      { duration: 0.75, delay: M.stagger(0.07), ease: EASE })
+      .then(function () {
+        els.forEach(function (el) { el.classList.add('is-shown'); });
+      });
+  }
+
+  function showLines(h) {
+    var lines = h.querySelectorAll('.split-line > span');
+    if (!lines.length) return;
+    var from = scrollDir === 'down' ? '105%' : '-105%';
+    Array.prototype.forEach.call(lines, function (l) {
+      if (l.dataset.settled !== 'true') l.style.transform = 'translateY(' + from + ')';
+    });
+    M.animate(lines,
+      { transform: ['translateY(' + from + ')', 'translateY(0%)'] },
+      { duration: 0.8, delay: M.stagger(0.07), ease: EASE })
+      .then(function () {
+        Array.prototype.forEach.call(lines, function (l) { l.dataset.settled = 'true'; });
+      });
+  }
+
+  function hideLines(h) {
+    Array.prototype.forEach.call(h.querySelectorAll('.split-line > span'), function (l) {
+      l.dataset.settled = 'false';
+      l.style.transform = 'translateY(' + (scrollDir === 'down' ? '105%' : '-105%') + ')';
+    });
+  }
+
+  function showImage(el) {
+    var from = scrollDir === 'down' ? 'inset(0 0 100% 0)' : 'inset(100% 0 0 0)';
+    if (!el.classList.contains('is-shown')) {
+      el.style.clipPath = from;
+      el.style.transform = 'scale(1.05)';
+    }
+    M.animate(el,
+      { clipPath: [from, 'inset(0 0 0% 0)'], transform: ['scale(1.05)', 'scale(1)'] },
+      { duration: 0.95, ease: EASE })
+      .then(function () { el.classList.add('is-shown'); });
+  }
+
+  function hideImage(el) {
+    var from = scrollDir === 'down' ? 'inset(0 0 100% 0)' : 'inset(100% 0 0 0)';
+    el.classList.remove('is-shown');
+    el.style.clipPath = from;
+    el.style.transform = 'scale(1.05)';
+  }
+
+  /* One observer drives everything. Entering plays; leaving completely re-arms. */
+  function observe(el, onEnter, onRearm) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { onEnter(); return; }
+        var r = entry.boundingClientRect;
+        var fullyOut = r.bottom <= 0 || r.top >= window.innerHeight;
+        if (fullyOut) onRearm();
+      });
+    }, { threshold: [0, 0.12], rootMargin: '0px 0px -5% 0px' });
+    io.observe(el);
+  }
+
   function setupReveals(root) {
     var scope = root || document;
 
     // pictures wipe open
-    Array.prototype.forEach.call(scope.querySelectorAll('.reveal-img:not(.is-shown)'), function (el) {
+    Array.prototype.forEach.call(scope.querySelectorAll('.reveal-img'), function (el) {
       if (el.closest('.hero__media')) return;         // handled by the intro
-      M.inView(el, function () {
-        M.animate(el,
-          { clipPath: ['inset(0 0 100% 0)', 'inset(0 0 0% 0)'], transform: ['scale(1.05)', 'scale(1)'] },
-          { duration: 0.95, ease: EASE })
-          .then(function () { el.classList.add('is-shown'); });
-      }, { amount: 0.15 });
+      observe(el, function () { showImage(el); }, function () { hideImage(el); });
     });
 
     // headings rise line by line
-    Array.prototype.forEach.call(scope.querySelectorAll('.anim h2:not([data-split])'), function (h) {
-      var holder = h.closest('.anim');
-      if (!holder || holder.classList.contains('is-shown')) return;
+    Array.prototype.forEach.call(scope.querySelectorAll('.anim h2'), function (h) {
       splitIntoLines(h);
-      M.inView(h, function () {
-        M.animate(h.querySelectorAll('.split-line > span'),
-          { transform: ['translateY(105%)', 'translateY(0%)'] },
-          { duration: 0.8, delay: M.stagger(0.07), ease: EASE });
-      }, { amount: 0.4 });
+      observe(h, function () { showLines(h); }, function () { hideLines(h); });
     });
 
     // everything else rises and fades, grouped so related things move together
     var groups = {};
     var n = 0;
-    Array.prototype.forEach.call(scope.querySelectorAll('.anim:not([data-intro]):not(.is-shown)'), function (el) {
+    Array.prototype.forEach.call(scope.querySelectorAll('.anim:not([data-intro])'), function (el) {
       var key = el.dataset.group || ('solo-' + (n++));
       (groups[key] = groups[key] || []).push(el);
     });
     Object.keys(groups).forEach(function (key) {
       var els = groups[key];
-      M.inView(els[0], function () {
-        M.animate(els,
-          { opacity: [0, 1], transform: ['translateY(22px)', 'translateY(0px)'] },
-          { duration: 0.8, delay: M.stagger(0.08), ease: EASE })
-          .then(function () { els.forEach(function (el) { el.classList.add('is-shown'); }); });
-      }, { amount: 0.12, margin: '0px 0px -6% 0px' });
+      observe(els[0],
+        function () { show(els); },
+        function () { els.forEach(hide); });
     });
   }
 
@@ -273,6 +361,24 @@
     setupReveals(document);
   }
 
+  /* =====================================================================
+     Hover glow — a light that tracks the cursor around the edge of a box
+     ===================================================================== */
+  (function () {
+    if (!window.matchMedia('(hover: hover)').matches) return;
+    var frame = null;
+    document.addEventListener('pointermove', function (e) {
+      var box = e.target.closest('[data-glow]');
+      if (!box || frame) return;
+      frame = requestAnimationFrame(function () {
+        frame = null;
+        var r = box.getBoundingClientRect();
+        box.style.setProperty('--glow-x', ((e.clientX - r.left) / r.width * 100) + '%');
+        box.style.setProperty('--glow-y', ((e.clientY - r.top) / r.height * 100) + '%');
+      });
+    }, { passive: true });
+  })();
+
   /* ------------------------------------------------------------- counters */
   var counters = document.querySelectorAll('[data-count]');
   if (counters.length) {
@@ -284,9 +390,12 @@
       if (!target) return;
       if (!canAnimate) { setValue(el, target); return; }
       setValue(el, 0);
-      M.inView(el, function () {
+      var running = false;
+      observe(el, function () {
+        if (running) return;
+        running = true;
         M.animate(0, target, { duration: 1.4, ease: EASE, onUpdate: function (v) { setValue(el, v); } });
-      }, { amount: 0.6 });
+      }, function () { running = false; setValue(el, 0); });
     });
   }
 

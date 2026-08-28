@@ -355,12 +355,26 @@ strong { font-weight: 650; color: var(--ink); }
 .pullquote cite { font-style: normal; font-family: var(--display); font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; color: var(--saffron-bright); font-weight: 600; }
 
 /* ---------- partners ---------- */
-.partners { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); border-top: 1px solid var(--rule); }
+.partners { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: .75rem; }
 .partner {
-  padding: 1.5rem 1.25rem 1.5rem 0; border-bottom: 1px solid var(--rule);
-  font-family: var(--display); font-weight: 600; font-size: 1rem; color: var(--ink);
+  position: relative; display: block; padding: 1.35rem 1.25rem;
+  border: 1px solid var(--rule); border-radius: var(--r-md); background: var(--white);
+  font-family: var(--display); color: var(--ink); text-decoration: none;
+  transition: border-color .25s ease, transform .25s cubic-bezier(.16,1,.3,1);
 }
-.partner span { display: block; font-weight: 400; font-size: .82rem; color: var(--muted); margin-top: .25rem; }
+.partner b { display: block; font-weight: 600; font-size: 1rem; line-height: 1.3; }
+.partner span {
+  display: block; font-weight: 400; font-size: .85rem; color: var(--muted);
+  margin-top: .3rem; min-height: 1px;
+}
+.partner span:empty { display: none; }
+a.partner::after {
+  content: "↗"; position: absolute; top: .9rem; right: 1rem;
+  font-size: .85rem; color: var(--saffron); opacity: 0;
+  transform: translate(-3px, 3px); transition: opacity .25s ease, transform .25s ease;
+}
+a.partner:hover::after { opacity: 1; transform: translate(0, 0); }
+.partner:hover { border-color: var(--green-500); transform: translateY(-3px); color: var(--ink); }
 
 /* ---------- CTA ---------- */
 .cta { background: var(--green-900); color: #C8D8D0; }
@@ -644,4 +658,65 @@ strong { font-weight: 650; color: var(--ink); }
   .js-anim .reveal-img { clip-path: none; }
   .split-line > span { transform: none !important; }
   .page-veil { display: none; }
+}
+
+/* ==========================================================================
+   Area-of-work banners — so it is obvious where each section begins
+   ========================================================================== */
+.worksection {
+  background: var(--green-900); color: #C8D8D0;
+  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+}
+.worksection__inner { display: grid; gap: .5rem; }
+.worksection__num {
+  font-family: var(--display); font-size: .8rem; font-weight: 700;
+  letter-spacing: .18em; color: var(--saffron-bright);
+}
+.worksection__title {
+  font-family: var(--display); font-weight: 700; color: #fff; margin: 0;
+  font-size: clamp(2.4rem, 6.5vw, 4.5rem); line-height: 1.02; letter-spacing: -.032em;
+}
+.worksection__standfirst {
+  color: #A9C4B8; max-width: 46ch; margin: .65rem 0 0;
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+}
+
+/* ==========================================================================
+   Hover glow — a soft light that follows the cursor around the edge of a box
+   ========================================================================== */
+[data-glow] { position: relative; isolation: isolate; }
+[data-glow]::before {
+  content: ""; position: absolute; inset: -1px; border-radius: inherit;
+  padding: 1px; pointer-events: none; z-index: 2; opacity: 0;
+  background: radial-gradient(
+    260px circle at var(--glow-x, 50%) var(--glow-y, 0%),
+    rgba(240,162,2,.85), rgba(26,122,84,.55) 42%, transparent 72%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  transition: opacity .3s ease;
+}
+[data-glow]:hover::before, [data-glow]:focus-within::before { opacity: 1; }
+[data-glow]::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  pointer-events: none; z-index: 1; opacity: 0;
+  background: radial-gradient(
+    380px circle at var(--glow-x, 50%) var(--glow-y, 0%),
+    rgba(240,162,2,.09), transparent 62%);
+  transition: opacity .3s ease;
+}
+[data-glow]:hover::after { opacity: 1; }
+[data-glow] > * { position: relative; z-index: 3; }
+
+/* the quote panel glows in its own colours */
+.quoteblock[data-glow]::before {
+  background: radial-gradient(300px circle at var(--glow-x, 50%) var(--glow-y, 0%),
+    rgba(240,162,2,.9), rgba(240,162,2,.25) 45%, transparent 72%);
+}
+
+@media (hover: none) {
+  [data-glow]::before, [data-glow]::after { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-glow]::before, [data-glow]::after { transition: none; }
 }
