@@ -50,12 +50,13 @@
         <a class="nav__link" href="about.html">About Us</a>
         <a class="nav__link" href="our-work.html">Our Work</a>
         <a class="nav__link" href="gallery.html">Gallery</a>
-        <a class="nav__link" href="donate.html" aria-current="page">Donate</a>
         <a class="nav__link" href="contact.html">Contact</a>
         <a class="btn btn--accent nav__cta" href="get-involved.html">Get Involved</a>
+        <a class="btn btn--primary nav__cta" href="donate.html">Donate</a>
       </nav>
       <div class="header-cta">
         <a class="btn btn--accent" href="get-involved.html">Get Involved</a>
+        <a class="btn btn--primary" href="donate.html">Donate</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
           <span class="nav-toggle__bars" aria-hidden="true"><i></i><i></i><i></i></span>
         </button>
@@ -72,26 +73,6 @@
       </div>
     </section>
     <section class="section">
-      <div class="wrap">
-      <div class="textpic">
-        <div class="textpic__body anim" data-group="pays-for">
-          <span class="label">What it pays for</span>
-          <h2>Ordinary things, kept going year after year</h2>
-          <p>There is nothing dramatic about what donations buy here. Teachers and teaching material. A doctor&rsquo;s time and the medicines to hand out afterwards. Uniforms and school bags. The counselling and the accompaniment that a woman leaving a violent home needs across many months.</p>
-          <p>Those ordinary things are exactly what a family living close to the edge cannot reach on their own, and they are what change a life over fifteen years rather than fifteen minutes.</p>
-          <!-- TODO: the strongest thing you can add anywhere on this website is what
-               specific amounts actually pay for — a year of a child's schooling, a month
-               of medicines, a set of uniforms. Real figures from your own accounts. -->
-        </div>
-        <figure class="textpic__media anim" data-group="pays-for" style="margin:0">
-          <img class="reveal-img" src="assets/img/community-2.svg" alt="Children with new school materials" width="1000" height="750" loading="lazy">
-          <figcaption>Books, uniforms and materials, bought and handed out.</figcaption>
-        </figure>
-      </div>
-      </div>
-    </section>
-
-    <section class="section section--stone">
       <div class="wrap">
         <div class="section-head anim" data-group="keeps-head">
           <span class="label">What it keeps running</span>
@@ -121,32 +102,12 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap">
-      <div class="textpic textpic--flip">
-        <div class="textpic__body anim" data-group="why-reaches">
-          <span class="label">Why it reaches people</span>
-          <h2>Small enough that nothing gets lost on the way</h2>
-          <p>Prayatn has worked in the same neighbourhoods since 1992, from an office in the middle of them. There is no chain of offices between a donation and the child it pays for.</p>
-          <p>The trustees meet every quarter to check each project against its plan. Parents sit on the committee that runs the school. If you want to know where your money went, there is someone who can tell you, by name.</p>
-          <p>Ask for the annual report and the audited accounts. Better still, <a href="contact.html">come and visit</a>.</p>
+        <div class="callout anim" data-group="keeps-note" style="margin-top:2.5rem">
+          <p>Prayatn has worked in the same neighbourhoods since 1992, from an office in the middle of them. There is no chain of offices between a donation and the child it pays for &mdash; ask for the annual report, or <a href="contact.html">come and visit</a>.</p>
         </div>
-        <figure class="textpic__media anim" data-group="why-reaches" style="margin:0">
-          <img class="reveal-img" src="assets/img/trustees-1.svg" alt="A trustees&rsquo; meeting at Prayatn" width="1000" height="750" loading="lazy">
-        </figure>
-      </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap">
-        <figure class="quoteblock anim" data-glow data-group="donate-quote" style="margin:0">
-          <blockquote>Everyone should be an equal and active partner in the journey of development &mdash; not a beneficiary of someone else&rsquo;s.</blockquote>
-          <cite>Prayatn &middot; working since 1992</cite>
-        </figure>
+        <!-- TODO: the strongest thing you can add to this page is what specific amounts
+             actually pay for — a year of a child's schooling, a month of medicines, a set
+             of uniforms. Real figures from your own accounts, not estimates. -->
       </div>
     </section>
 
@@ -155,15 +116,14 @@
         <div class="section-head anim" data-group="give-head">
           <span class="label">Ways to give</span>
           <h2>However you would like to help</h2>
-          <p>Whatever you give goes into the work itself.</p>
         </div>
         <div class="givegrid anim" data-group="give">
-          <div class="giveway giveway--primary" data-glow>
-            <span class="giveway__tag">Getting in touch</span>
-            <h3>Please call or write to us</h3>
-            <p>Online donations are being set up. In the meantime we would be glad to hear from you directly, and we will tell you exactly how to give.</p>
-            <p><a class="btn btn--accent" href="tel:+911145688954">Call 011-4568 8954</a></p>
-            <p class="giveway__note">Or email <a href="mailto:prayatn_1994@yahoo.co.in">prayatn_1994@yahoo.co.in</a>.</p>
+          <div class="giveway giveway--primary giveway--placeholder" data-glow>
+            <span class="giveway__tag">Card, netbanking or UPI</span>
+            <h3>Give online</h3>
+            <p>The quickest way. You will be taken to our payment page, and a receipt is emailed to you.</p>
+            <a class="btn btn--accent" href="#give" aria-disabled="true">Donate now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <p class="giveway__placeholder">Placeholder &mdash; this button is not connected to a payment page yet. Add the real link and it starts working.</p>
           </div>
         </div>
       </div>
@@ -178,28 +138,9 @@
                them in the DONATION settings at the top of the generator and they will
                appear here automatically. Indian donors need both to claim relief, and
                most will look for them before giving. -->
-      </div>
-    </section>
-
-    <section class="section section--stone">
-      <div class="wrap">
-        <div class="grid grid--2">
-          <div class="anim" data-group="other">
-            <span class="label">Other ways</span>
-            <h2>Giving that is not money</h2>
-            <p>Books, stationery, uniforms, school bags, computers, teaching material, medicines and medical supplies are all used rather than stored.</p>
-            <p>So is time. Teachers, doctors, counsellors, lawyers and trainers who can give a few regular hours are worth a great deal to an organisation this size. <a href="get-involved.html">See the ways to get involved</a>.</p>
-          </div>
-          <div class="anim" data-group="other">
-            <span class="label">Questions</span>
-            <h2>Talk to us first, if you would rather</h2>
-            <p>If you want to know exactly where your money would go, or you are giving on behalf of a company or a foundation, please get in touch before you give.</p>
-            <dl style="margin:1.25rem 0 0">
-              <div class="contact-row"><dt>Telephone</dt><dd><a href="tel:+911145688954">011-4568 8954</a></dd></div>
-              <div class="contact-row"><dt>Email</dt><dd><a href="mailto:prayatn_1994@yahoo.co.in">prayatn_1994@yahoo.co.in</a></dd></div>
-            </dl>
-          </div>
-        </div>
+        <h2 style="margin-top:2.5rem">Giving that is not money</h2>
+        <p>Books, stationery, uniforms, school bags, computers, teaching material, medicines and medical supplies are all used rather than stored. So is time &mdash; see the <a href="get-involved.html">ways to get involved</a>.</p>
+        <p>If you want to know exactly where your money would go, or you are giving on behalf of a company, please call <a href="tel:+911145688954">011-4568 8954</a> or write to <a href="mailto:prayatn_1994@yahoo.co.in">prayatn_1994@yahoo.co.in</a> before you give.</p>
       </div>
     </section>
 
