@@ -32,7 +32,12 @@
       Array.prototype.forEach.call(document.querySelectorAll('.anim, .reveal-img'), function (el) {
         var r = el.getBoundingClientRect();
         var onScreen = r.top < window.innerHeight * 0.85 && r.bottom > window.innerHeight * 0.15;
-        var hidden = parseFloat(getComputedStyle(el).opacity) < 0.05;
+        var cs = getComputedStyle(el);
+        // a picture wiped shut is just as invisible as one at zero opacity
+        // open means every inset is zero, however the browser abbreviates it
+        var clipped = /inset/.test(cs.clipPath)
+          && (cs.clipPath.match(/-?[\d.]+(px|%)/g) || []).some(function (v) { return parseFloat(v) > 0.5; });
+        var hidden = parseFloat(cs.opacity) < 0.05 || clipped;
         if (!onScreen || !hidden) { stuck.set(el, 0); return; }
         var count = (stuck.get(el) || 0) + 1;
         stuck.set(el, count);
@@ -128,9 +133,11 @@
   }
 
   function show(els) {
+    var lead = els[0];
+    if (lead.dataset.revealing === 'true' || lead.classList.contains('is-shown')) return;
+    lead.dataset.revealing = 'true';
     var from = offset();   // read the direction now, as it enters
     els.forEach(function (el) {
-      if (el.classList.contains('is-shown')) return;
       el.style.opacity = '0';
       el.style.transform = 'translateY(' + from + 'px)';
     });
@@ -138,13 +145,21 @@
       { opacity: [0, 1], transform: ['translateY(' + from + 'px)', 'translateY(0px)'] },
       { duration: 0.75, delay: M.stagger(0.07), ease: EASE })
       .then(function () {
-        els.forEach(function (el) { el.classList.add('is-shown'); });
+        lead.dataset.revealing = 'false';
+        els.forEach(function (el) {
+          el.classList.add('is-shown');
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0px)';
+        });
       });
   }
 
   function showLines(h) {
     var lines = h.querySelectorAll('.split-line > span');
     if (!lines.length) return;
+    if (h.dataset.revealing === 'true') return;
+    if (lines[0].dataset.settled === 'true') return;
+    h.dataset.revealing = 'true';
     var from = scrollDir === 'down' ? '105%' : '-105%';
     Array.prototype.forEach.call(lines, function (l) {
       if (l.dataset.settled !== 'true') l.style.transform = 'translateY(' + from + ')';
@@ -153,31 +168,47 @@
       { transform: ['translateY(' + from + ')', 'translateY(0%)'] },
       { duration: 0.8, delay: M.stagger(0.07), ease: EASE })
       .then(function () {
-        Array.prototype.forEach.call(lines, function (l) { l.dataset.settled = 'true'; });
+        h.dataset.revealing = 'false';
+        Array.prototype.forEach.call(lines, function (l) {
+          l.dataset.settled = 'true';
+          l.style.transform = 'translateY(0%)';
+        });
       });
   }
 
   function hideLines(h) {
+    h.dataset.revealing = 'false';
     Array.prototype.forEach.call(h.querySelectorAll('.split-line > span'), function (l) {
       l.dataset.settled = 'false';
       l.style.transform = 'translateY(' + (scrollDir === 'down' ? '105%' : '-105%') + ')';
     });
   }
 
+  /* Wiping a picture open changes its painted box, which makes the observer
+     fire again. Without this guard the second call restarts the wipe from the
+     beginning, the third restarts that one, and the picture never finishes
+     opening — it sits as a sliver and reads as an empty grey box. So a reveal
+     that is already playing, or has already played, is left alone. */
   function showImage(el) {
+    if (el.dataset.revealing === 'true' || el.classList.contains('is-shown')) return;
+    el.dataset.revealing = 'true';
     var from = scrollDir === 'down' ? 'inset(0 0 100% 0)' : 'inset(100% 0 0 0)';
-    if (!el.classList.contains('is-shown')) {
-      el.style.clipPath = from;
-      el.style.transform = 'scale(1.05)';
-    }
+    el.style.clipPath = from;
+    el.style.transform = 'scale(1.05)';
     M.animate(el,
       { clipPath: [from, 'inset(0 0 0% 0)'], transform: ['scale(1.05)', 'scale(1)'] },
       { duration: 0.95, ease: EASE })
-      .then(function () { el.classList.add('is-shown'); });
+      .then(function () {
+        el.dataset.revealing = 'false';
+        el.classList.add('is-shown');
+        el.style.clipPath = 'inset(0 0 0% 0)';
+        el.style.transform = 'scale(1)';
+      });
   }
 
   function hideImage(el) {
     var from = scrollDir === 'down' ? 'inset(0 0 100% 0)' : 'inset(100% 0 0 0)';
+    el.dataset.revealing = 'false';
     el.classList.remove('is-shown');
     el.style.clipPath = from;
     el.style.transform = 'scale(1.05)';
@@ -202,7 +233,16 @@
     // pictures wipe open
     Array.prototype.forEach.call(scope.querySelectorAll('.reveal-img'), function (el) {
       if (el.closest('.hero__media')) return;         // handled by the intro
-      observe(el, function () { showImage(el); }, function () { hideImage(el); });
+      // The photo strip scrolls sideways, so most of it sits outside the
+      // viewport horizontally and a scroll reveal there would leave pictures
+      // shut. These simply show.
+      if (el.closest('.strip')) { el.classList.add('is-shown'); return; }
+      // Watch the frame around the picture, never the picture itself. A wiped-
+      // shut image has an empty visible rect, so an observer pointed at it
+      // would never see it arrive — it would stay shut for good.
+      observe(el.parentElement || el,
+        function () { showImage(el); },
+        function () { hideImage(el); });
     });
 
     // headings rise line by line
