@@ -19,7 +19,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
-<script>document.documentElement.classList.add('js-anim');</script>
+<script>
+(function (d) {
+  var r = d.documentElement;
+  r.classList.add('js-anim');
+  /* Hiding content before the animation runs is only safe if something is
+     guaranteed to un-hide it. If the behaviour script never arrives — a dropped
+     connection, a blocked file — nothing would, and the page would stay a blank
+     shell for good. So show everything after two seconds unless main.js has
+     taken over by then, and tell it not to animate if that has happened. */
+  setTimeout(function () {
+    if (!window.Prayatn) { window.__prayatnFailsafe = true; r.classList.remove('js-anim'); }
+  }, 2000);
+})(document);
+</script>
+<noscript><style>.js-anim .anim, .js-anim .reveal-img { opacity: 1 !important; clip-path: none !important; }</style></noscript>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -75,27 +89,27 @@
           <h2>Pick whichever fits your life</h2>
         </div>
         <div class="grid grid--3">
-          <div class="icon-card anim" data-glow data-group="ways">
+          <div class="icon-card anim" data-group="ways">
             <h3>Give an hour a week</h3>
             <p>Teach, tutor, coach for exams, or help at a health check-up. Turning up regularly matters more than doing a great deal in one day.</p>
           </div>
-          <div class="icon-card anim" data-glow data-group="ways">
+          <div class="icon-card anim" data-group="ways">
             <h3>Share a professional skill</h3>
             <p>Doctors, counsellors, teachers, women lawyers, vocational trainers, accountants. Skilled time given free goes a very long way here.</p>
           </div>
-          <div class="icon-card anim" data-glow data-group="ways">
+          <div class="icon-card anim" data-group="ways">
             <h3>Support a student</h3>
             <p>Back a child through a year of school, or contribute to the scholarship scheme that keeps meritorious students studying.</p>
           </div>
-          <div class="icon-card anim" data-glow data-group="ways2">
+          <div class="icon-card anim" data-group="ways2">
             <h3>Give materials</h3>
             <p>Books, stationery, uniforms, school bags, computers, teaching material, medicines and medical supplies. All used, not stored.</p>
           </div>
-          <div class="icon-card anim" data-glow data-group="ways2">
+          <div class="icon-card anim" data-group="ways2">
             <h3>Partner with us</h3>
             <p>For companies and foundations: project funding, CSR partnerships, employee volunteering. You can see the whole of our work in one afternoon.</p>
           </div>
-          <div class="icon-card anim" data-glow data-group="ways2">
+          <div class="icon-card anim" data-group="ways2">
             <h3>Intern with us</h3>
             <p>Students of social work, public health and education can spend a term on live projects rather than observing from the side.</p>
           </div>
@@ -136,7 +150,7 @@
             <p class="dek">We read every message. A reply usually takes a few working days &mdash; we are a small team.</p>
             <figure style="margin:2rem 0 0"><img class="reveal-img" src="assets/img/community-1.jpg" alt="A large community gathering in a park, seated on the grass" width="1000" height="700" loading="lazy"></figure>
           </div>
-          <div class="form-panel anim" data-glow data-group="write">
+          <div class="form-panel anim" data-group="write">
             <!-- To receive submissions by email, create a free endpoint at formspree.io and
                  paste the URL into data-endpoint below. Until then the form opens the
                  visitor's own email app with the message ready to send. -->

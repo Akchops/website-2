@@ -7,7 +7,10 @@
 
   var M = window.Motion || null;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var canAnimate = !!M && !reduceMotion;
+  // If we arrived so late that the failsafe in the page head already showed
+  // everything, animating now would flash the content back to invisible first.
+  var lateArrival = window.__prayatnFailsafe === true;
+  var canAnimate = !!M && !reduceMotion && !lateArrival;
 
   var EASE = [0.16, 1, 0.3, 1];          // long, settling ease
   var SPRING = { type: 'spring', stiffness: 320, damping: 34 };

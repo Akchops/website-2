@@ -260,38 +260,108 @@ strong { font-weight: 650; color: var(--ink); }
 @media (min-width: 981px) { .nav-backdrop { display: none; } }
 
 /* ---------- hero ---------- */
-.hero { padding-block: clamp(2.5rem, 5vw, 4.25rem) 0; }
-.hero__head { max-width: 900px; }
-.hero h1 { margin-bottom: 1.1rem; }
-.hero h1 .hl { color: var(--green-700); }
-.hero__lede { margin-bottom: 1.9rem; }
-.hero__media {
-  /* Full shorthand, so it also clears the browser's default figure margins —
-     the element must not need an inline style:margin:0 to sit correctly. */
-  margin: clamp(2.25rem, 4vw, 3.25rem) 0 0; position: relative;
-  border-radius: var(--r-md); overflow: hidden; background: var(--stone-100);
+/* The hero fills the window edge to edge, with the writing over the picture.
+   The photograph is the background, so the text sits on a scrim dark enough
+   to keep it legible whatever the picture behind it happens to be. */
+.hero {
+  position: relative; isolation: isolate;
+  min-height: min(88vh, 780px);
+  display: flex; align-items: flex-end;
+  padding-block: clamp(4rem, 12vw, 8rem) clamp(2.25rem, 5vw, 3.5rem);
+  background: var(--green-900);
+  overflow: hidden;
 }
-.hero__media img { width: 100%; height: auto; aspect-ratio: 21/9; object-fit: cover; }
-@media (max-width: 700px) { .hero__media img { aspect-ratio: 4/3; } }
+.hero__media { position: absolute; inset: 0; z-index: -2; margin: 0; }
+.hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; }
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  /* dark where the words are, close to clear where the photograph is */
+  background:
+    linear-gradient(to right, rgba(4,26,18,.93) 0%, rgba(4,26,18,.82) 30%, rgba(4,26,18,.3) 62%, rgba(4,26,18,.08) 100%),
+    linear-gradient(to top, rgba(4,26,18,.55) 0%, transparent 34%);
+}
+.hero__inner { position: relative; max-width: min(var(--wrap), 100%); }
+.hero .label { color: var(--saffron-bright); }
+.hero h1 {
+  color: #fff; margin-bottom: 1.1rem; max-width: 16ch;
+  font-size: clamp(2.6rem, 6.4vw, 4.6rem); letter-spacing: -0.032em; line-height: 1.02;
+  text-shadow: 0 2px 30px rgba(0,0,0,.35);
+}
+.hero h1 .hl { color: var(--saffron-bright); }
+.hero__lede { color: rgba(255,255,255,.9); margin-bottom: 1.9rem; max-width: 54ch; }
+.hero .btn--primary { background: var(--saffron); }
+.hero .btn--primary:hover { background: #A85B06; }
 .hero__caption {
-  font-family: var(--display); font-size: .8rem; color: var(--muted);
-  margin-top: .7rem; display: flex; flex-wrap: wrap; gap: .15rem .5rem; align-items: baseline;
+  font-family: var(--display); font-size: .8rem; color: rgba(255,255,255,.72);
+  margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,.18);
+  display: flex; flex-wrap: wrap; gap: .15rem .5rem; align-items: baseline;
 }
-.hero__caption b { white-space: nowrap; }
-.hero__caption b { color: var(--ink); font-weight: 600; }
+.hero__caption b { white-space: nowrap; color: #fff; font-weight: 600; }
+@media (max-width: 900px) {
+  /* narrow screens have no room beside the text, so darken the whole frame */
+  .hero::after {
+    background: linear-gradient(to top, rgba(4,26,18,.93) 0%, rgba(4,26,18,.8) 45%, rgba(4,26,18,.62) 100%);
+  }
+}
+@media (max-width: 700px) {
+  .hero { min-height: min(82vh, 620px); }
+  .hero h1 { max-width: none; }
+}
+
+/* ==========================================================================
+   Origin — the founding story, given the whole width so it reads as the
+   turning point of the page rather than one more row of text and picture.
+   ========================================================================== */
+.origin {
+  position: relative; isolation: isolate; overflow: hidden;
+  background: var(--green-900);
+  padding-block: clamp(3.5rem, 9vw, 7rem);
+}
+.origin__media { position: absolute; inset: 0; z-index: -2; }
+.origin__media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; }
+.origin::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(to right, rgba(6,32,22,.96) 0%, rgba(6,32,22,.88) 46%, rgba(6,32,22,.55) 100%),
+    linear-gradient(to bottom, rgba(6,32,22,.5), rgba(6,32,22,.5));
+}
+.origin__inner { position: relative; }
+.origin__panel { max-width: 60ch; color: rgba(255,255,255,.86); }
+.origin__panel h2 { color: #fff; font-size: clamp(1.9rem, 3.8vw, 2.9rem); }
+.origin__panel .label { color: var(--saffron-bright); }
+.origin__year {
+  font-family: var(--display); font-weight: 700; line-height: .9;
+  font-size: clamp(4.5rem, 13vw, 9rem); letter-spacing: -.05em;
+  margin: 0 0 .35rem; color: transparent;
+  -webkit-text-stroke: 1.5px rgba(240,162,2,.75);
+}
+.origin__year span { display: block; }
+.origin__note {
+  margin-top: 1.6rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,.2);
+  font-family: var(--display); font-size: .87rem; color: rgba(255,255,255,.6);
+}
+@media (max-width: 700px) {
+  .origin::after { background: linear-gradient(to bottom, rgba(6,32,22,.9), rgba(6,32,22,.95)); }
+}
 
 /* fact strip under hero */
-.factstrip { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-.factstrip__inner { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); }
-.fact { padding: 1.6rem 1.5rem 1.6rem 0; border-right: 1px solid var(--rule); }
+.factstrip { background: var(--green-900); color: #C8D8D0; }
+.factstrip__inner {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  padding-block: clamp(2.25rem, 5vw, 3.5rem);
+}
+.fact { padding: .9rem 1.25rem; text-align: center; border-right: 1px solid rgba(255,255,255,.14); }
 .fact:last-child { border-right: 0; }
-@media (max-width: 640px) { .fact { border-right: 0; border-bottom: 1px solid var(--rule-soft); padding-right: 0; } .fact:last-child { border-bottom: 0; } }
+@media (max-width: 640px) { .fact { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.14); } .fact:last-child { border-bottom: 0; } }
 .fact b {
-  display: block; font-family: var(--display); font-size: clamp(2rem, 4vw, 2.85rem);
-  font-weight: 700; letter-spacing: -.03em; color: var(--green-700); line-height: 1;
+  display: block; font-family: var(--display); font-size: clamp(2.6rem, 6vw, 4.1rem);
+  font-weight: 700; letter-spacing: -.04em; color: var(--saffron-bright); line-height: 1;
   font-variant-numeric: tabular-nums;
 }
-.fact span { display: block; margin-top: .55rem; font-family: var(--display); font-size: .87rem; color: var(--muted); max-width: 22ch; }
+.fact span {
+  display: block; margin: .7rem auto 0; font-family: var(--display); font-size: .84rem;
+  letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.72); max-width: 20ch;
+}
 
 /* ---------- feature rows ---------- */
 .feature { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center; grid-template-columns: 1fr; }
@@ -306,7 +376,16 @@ strong { font-weight: 650; color: var(--ink); }
   transition: border-color .2s ease;
 }
 .workcard:hover { border-color: var(--green-500); color: inherit; }
-.workcard__media { aspect-ratio: 16/10; overflow: hidden; background: var(--stone-100); }
+.workcard__media { aspect-ratio: 16/10; overflow: hidden; background: var(--stone-100); position: relative; }
+.workcard__media::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(6,32,22,.85) 0%, rgba(6,32,22,.35) 45%, transparent 78%);
+}
+.workcard__title {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; margin: 0;
+  padding: 1rem 1.15rem; color: #fff; font-size: clamp(1.25rem, 2vw, 1.55rem);
+  letter-spacing: -.02em; text-shadow: 0 1px 16px rgba(0,0,0,.4);
+}
 .workcard__media img { width: 100%; height: 100%; object-fit: cover; }
 .workcard__body { padding: 1.4rem 1.4rem 1.5rem; display: flex; flex-direction: column; flex: 1; }
 .workcard__body h3 { margin-bottom: .5rem; }
@@ -364,14 +443,16 @@ strong { font-weight: 650; color: var(--ink); }
    Names, not buttons. These are not links, so nothing here may look or behave
    as though it can be clicked: no box, no hover lift, no pointer cursor. */
 .partners {
-  /* narrow enough that all five sit on one row on a desktop, so the last name
-     is not orphaned under a stub of rule */
+  /* names sit on a tinted band, evenly spaced, so the row reads as one block
+     rather than five items in a list */
   display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 195px), 1fr));
-  border-top: 1px solid var(--rule);
+  gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule); border-radius: var(--r-md); overflow: hidden;
 }
 .partner {
-  padding: 1.4rem 1.5rem 1.4rem 0; border-bottom: 1px solid var(--rule);
+  padding: 1.75rem 1.25rem; background: var(--green-50); text-align: center;
   font-family: var(--display); color: var(--ink); cursor: default;
+  display: flex; flex-direction: column; justify-content: center;
 }
 .partner b { display: block; font-weight: 600; font-size: 1rem; line-height: 1.35; }
 .partner span {
@@ -471,7 +552,18 @@ strong { font-weight: 650; color: var(--ink); }
 .contact-row dd { margin: 0; color: var(--ink); }
 .contact-row a { text-decoration: none; }
 .contact-row a:hover { text-decoration: underline; }
-.map-embed { border: 1px solid var(--rule); border-radius: var(--r-md); width: 100%; aspect-ratio: 16/8; }
+/* where to find us — a link instead of an embedded map, so nothing can break */
+.findus {
+  display: flex; flex-wrap: wrap; gap: 1.25rem 2rem;
+  align-items: center; justify-content: space-between;
+  border: 1px solid var(--rule); border-left: 3px solid var(--saffron);
+  border-radius: var(--r-md); padding: clamp(1.25rem, 3vw, 1.9rem);
+  background: var(--stone-50);
+  transition: border-color .2s ease;
+}
+.findus:hover { border-color: var(--green-500); border-left-color: var(--saffron); }
+.findus .label { margin-bottom: .4rem; }
+.findus__addr { font-family: var(--display); font-size: 1.05rem; color: var(--ink); margin: 0; }
 
 /* ---------- footer ---------- */
 .site-footer { background: var(--green-900); color: #9FB9AE; padding-block: clamp(2.75rem, 5vw, 4rem) 1.75rem; font-size: .95rem; }
@@ -685,7 +777,9 @@ strong { font-weight: 650; color: var(--ink); }
 }
 
 /* ==========================================================================
-   Hover glow — a soft light that follows the cursor around the edge of a box
+   Hover glow — a soft light that follows the cursor around the edge of a box.
+   Only the ways-to-give cards on the Donate page carry data-glow. Everywhere
+   else a hover just turns the edge green, which is quieter and reads better.
    ========================================================================== */
 [data-glow] { position: relative; isolation: isolate; }
 [data-glow]::before {
@@ -711,11 +805,9 @@ strong { font-weight: 650; color: var(--ink); }
 [data-glow]:hover::after { opacity: 1; }
 [data-glow] > * { position: relative; z-index: 3; }
 
-/* the quote panel glows in its own colours */
-.quoteblock[data-glow]::before {
-  background: radial-gradient(300px circle at var(--glow-x, 50%) var(--glow-y, 0%),
-    rgba(240,162,2,.9), rgba(240,162,2,.25) 45%, transparent 72%);
-}
+/* the panels that are not cards answer a hover with a green edge too */
+.form-panel { transition: border-color .2s ease; }
+.form-panel:hover, .form-panel:focus-within { border-color: var(--green-500); }
 
 @media (hover: none) {
   [data-glow]::before, [data-glow]::after { display: none; }
