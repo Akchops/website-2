@@ -94,6 +94,7 @@ strong { font-weight: 650; color: var(--ink); }
 .section--stone { background: var(--stone-50); }
 .section--ink { background: var(--green-900); color: #C8D8D0; }
 .section--ink h2, .section--ink h3 { color: #fff; }
+.section--ink .section-head p, .section--ink .lede { color: #A9C4B8; }
 .section--ruled { border-top: 1px solid var(--rule); }
 
 .grid { display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); }
@@ -443,22 +444,24 @@ strong { font-weight: 650; color: var(--ink); }
    Names, not buttons. These are not links, so nothing here may look or behave
    as though it can be clicked: no box, no hover lift, no pointer cursor. */
 .partners {
-  /* A credit list, not a logo wall. Tinted cells of equal size gave five names
-     the look of an unfinished grid — every organisation weighted the same and
-     nothing said about any of them. Set as rows it reads as finished whether or
-     not the second cell has been filled in, and matches the trust details above. */
-  list-style: none; margin: 0; padding: 1.3rem 0 0;
-  border-top: 1px solid var(--rule);
-  display: flex; flex-wrap: wrap; gap: 1.15rem 2.75rem;
+  /* A roll call, on the page's one dark band. Five names set at heading size and
+     ruled off from each other, so the organisations paying for this work are
+     impossible to scroll past. Rows rather than columns: five items never divide
+     evenly into a grid, and a name at this size needs the width. */
+  list-style: none; margin: 0; padding: 0;
+  border-top: 1px solid rgba(255, 255, 255, .16);
 }
-.partner { max-width: 20rem; }
+.partner {
+  padding-block: clamp(.9rem, 2vw, 1.4rem);
+  border-bottom: 1px solid rgba(255, 255, 255, .16);
+}
 .partner b {
-  display: block; font-family: var(--display); font-weight: 600; font-size: 1.02rem;
-  line-height: 1.35; color: var(--ink);
+  display: block; font-family: var(--display); font-weight: 600; color: #fff;
+  font-size: clamp(1.35rem, 3.4vw, 2.35rem); line-height: 1.18; letter-spacing: -.015em;
 }
 /* The supporting line stays out of the way until there is something to put in
    it, so an unfilled list still looks finished rather than half-built. */
-.partner span { display: block; font-size: .9rem; color: var(--muted); margin-top: .15rem; }
+.partner span { display: block; margin-top: .35rem; font-size: .95rem; color: #A9C4B8; max-width: 48ch; }
 .partner span:empty { display: none; }
 
 /* ---------- CTA ---------- */
