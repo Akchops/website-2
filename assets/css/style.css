@@ -443,21 +443,22 @@ strong { font-weight: 650; color: var(--ink); }
    Names, not buttons. These are not links, so nothing here may look or behave
    as though it can be clicked: no box, no hover lift, no pointer cursor. */
 .partners {
-  /* names sit on a tinted band, evenly spaced, so the row reads as one block
-     rather than five items in a list */
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 195px), 1fr));
-  gap: 1px; background: var(--rule);
-  border: 1px solid var(--rule); border-radius: var(--r-md); overflow: hidden;
+  /* A credit list, not a logo wall. Tinted cells of equal size gave five names
+     the look of an unfinished grid — every organisation weighted the same and
+     nothing said about any of them. Set as rows it reads as finished whether or
+     not the second cell has been filled in, and matches the trust details above. */
+  list-style: none; margin: 0; padding: 1.3rem 0 0;
+  border-top: 1px solid var(--rule);
+  display: flex; flex-wrap: wrap; gap: 1.15rem 2.75rem;
 }
-.partner {
-  padding: 1.75rem 1.25rem; background: var(--green-50); text-align: center;
-  font-family: var(--display); color: var(--ink); cursor: default;
-  display: flex; flex-direction: column; justify-content: center;
+.partner { max-width: 20rem; }
+.partner b {
+  display: block; font-family: var(--display); font-weight: 600; font-size: 1.02rem;
+  line-height: 1.35; color: var(--ink);
 }
-.partner b { display: block; font-weight: 600; font-size: 1rem; line-height: 1.35; }
-.partner span {
-  display: block; font-weight: 400; font-size: .87rem; color: var(--muted); margin-top: .25rem;
-}
+/* The supporting line stays out of the way until there is something to put in
+   it, so an unfilled list still looks finished rather than half-built. */
+.partner span { display: block; font-size: .9rem; color: var(--muted); margin-top: .15rem; }
 .partner span:empty { display: none; }
 
 /* ---------- CTA ---------- */
