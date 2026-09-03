@@ -19,7 +19,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
-<script>document.documentElement.classList.add('js-anim');</script>
+<script>
+(function (d) {
+  var r = d.documentElement;
+  r.classList.add('js-anim');
+  /* Hiding content before the animation runs is only safe if something is
+     guaranteed to un-hide it. If the behaviour script never arrives — a dropped
+     connection, a blocked file — nothing would, and the page would stay a blank
+     shell for good. So show everything after two seconds unless main.js has
+     taken over by then, and tell it not to animate if that has happened. */
+  setTimeout(function () {
+    if (!window.Prayatn) { window.__prayatnFailsafe = true; r.classList.remove('js-anim'); }
+  }, 2000);
+})(document);
+</script>
+<noscript><style>.js-anim .anim, .js-anim .reveal-img { opacity: 1 !important; clip-path: none !important; }</style></noscript>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -89,7 +103,7 @@
                  women seeking help, put it here. Someone in difficulty should not have to
                  guess what to do next. -->
           </div>
-          <div class="form-panel anim" data-glow data-group="contact">
+          <div class="form-panel anim" data-group="contact">
             <form data-mailto="prayatn_1994@yahoo.co.in" data-subject="Enquiry from the Prayatn website" data-endpoint="" novalidate>
               <div class="field">
                 <label for="c-name">Your name <span class="req">*</span></label>
@@ -120,7 +134,17 @@
 
     <section class="section section--tight">
       <div class="wrap anim" data-group="map">
-        <iframe class="map-embed" title="Map showing Prayatn&rsquo;s office in Kalkaji, New Delhi" src="https://www.google.com/maps?q=E-103,+Kalkaji,+New+Delhi+110019&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        <!-- An embedded map was here. It was taken out: an embed that fails to
+             load leaves a broken grey rectangle on the page, and it loads
+             Google's tracking into every visit. A plain link does the same job,
+             opens in the visitor's own map app, and cannot break. -->
+        <div class="findus">
+          <div>
+            <span class="label">Find us</span>
+            <p class="findus__addr">E-103, Ground Floor, Kalkaji, New Delhi &ndash; 110019</p>
+          </div>
+          <a class="btn btn--ghost" href="https://www.google.com/maps/search/?api=1&amp;query=E-103%2C+Kalkaji%2C+New+Delhi+110019" target="_blank" rel="noopener">Open in Maps <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
       </div>
     </section>
   </main>

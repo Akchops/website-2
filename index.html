@@ -19,7 +19,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
-<script>document.documentElement.classList.add('js-anim');</script>
+<script>
+(function (d) {
+  var r = d.documentElement;
+  r.classList.add('js-anim');
+  /* Hiding content before the animation runs is only safe if something is
+     guaranteed to un-hide it. If the behaviour script never arrives — a dropped
+     connection, a blocked file — nothing would, and the page would stay a blank
+     shell for good. So show everything after two seconds unless main.js has
+     taken over by then, and tell it not to animate if that has happened. */
+  setTimeout(function () {
+    if (!window.Prayatn) { window.__prayatnFailsafe = true; r.classList.remove('js-anim'); }
+  }, 2000);
+})(document);
+</script>
+<noscript><style>.js-anim .anim, .js-anim .reveal-img { opacity: 1 !important; clip-path: none !important; }</style></noscript>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -84,15 +98,13 @@
   <div class="page-veil" aria-hidden="true"></div>
   <main id="main">
     <section class="hero">
-      <div class="wrap">
-        <div class="hero__head">
-          <span class="label anim" data-intro>A developmental effort &middot; New Delhi &middot; Since 1992</span>
-          <h1 class="anim" data-intro>Empowering lives,<br><span class="hl">transforming communities</span></h1>
-          <p class="lede hero__lede anim" data-intro>A school. A health centre. A place for women to turn to. Prayatn has worked with the same neighbourhoods of Kalkaji, New Delhi since 1992.</p>
-        </div>
-        <figure class="hero__media anim" data-intro>
-          <img class="reveal-img" src="assets/img/hero-main.jpg" alt="Children of Seth Vidyalaya with their medals on the school sports day" width="1131" height="485">
-        </figure>
+      <div class="hero__media">
+        <img class="reveal-img" src="assets/img/hero-main.jpg" alt="Children of Seth Vidyalaya with their medals on the school sports day" width="1700" height="1133">
+      </div>
+      <div class="wrap hero__inner">
+        <span class="label anim" data-intro>A developmental effort &middot; New Delhi &middot; Since 1992</span>
+        <h1 class="anim" data-intro>Empowering lives,<br><span class="hl">transforming communities</span></h1>
+        <p class="lede hero__lede anim" data-intro>A school. A health centre. A place for women to turn to. Prayatn has worked with the same neighbourhoods of Kalkaji, New Delhi since 1992.</p>
         <p class="hero__caption anim" data-intro><b>Kalkaji, New Delhi.</b> Education, healthcare and women&rsquo;s development, in one neighbourhood.</p>
       </div>
     </section>
@@ -139,10 +151,9 @@
           <p>To the families we serve these are not separate programmes. They are the same life.</p>
         </div>
         <div class="grid grid--3">
-          <div class="workcard anim" data-glow data-group="work">
-            <div class="workcard__media"><img class="reveal-img" src="assets/img/education.jpg" alt="Children reading picture books together in the school library" width="900" height="620" loading="lazy"></div>
+          <div class="workcard anim" data-group="work">
+            <div class="workcard__media"><img class="reveal-img" src="assets/img/education.jpg" alt="Children reading picture books together in the school library" width="900" height="620" loading="lazy"><h3 class="workcard__title">Education</h3></div>
             <div class="workcard__body">
-              <h3>Education</h3>
               <p>A school in the community, and support for students who would otherwise have to stop.</p>
               <ul class="workcard__projects">
                 <li>Seth Vidyalaya</li>
@@ -150,10 +161,9 @@
               </ul>
             </div>
           </div>
-          <div class="workcard anim" data-glow data-group="work">
-            <div class="workcard__media"><img class="reveal-img" src="assets/img/healthcare.jpg" alt="A doctor examining a schoolgirl at the Prayatn School Health Clinic" width="900" height="620" loading="lazy"></div>
+          <div class="workcard anim" data-group="work">
+            <div class="workcard__media"><img class="reveal-img" src="assets/img/healthcare.jpg" alt="A doctor examining a schoolgirl at the Prayatn School Health Clinic" width="900" height="620" loading="lazy"><h3 class="workcard__title">Healthcare</h3></div>
             <div class="workcard__body">
-              <h3>Healthcare</h3>
               <p>Everyday care close to home, and health programmes that reach children in school.</p>
               <ul class="workcard__projects">
                 <li>Swaasthya Kendra</li>
@@ -161,10 +171,9 @@
               </ul>
             </div>
           </div>
-          <div class="workcard anim" data-glow data-group="work">
-            <div class="workcard__media"><img class="reveal-img" src="assets/img/women.jpg" alt="Women seated in a circle at a Prayatn meeting" width="900" height="620" loading="lazy"></div>
+          <div class="workcard anim" data-group="work">
+            <div class="workcard__media"><img class="reveal-img" src="assets/img/women.jpg" alt="Women seated in a circle at a Prayatn meeting" width="900" height="620" loading="lazy"><h3 class="workcard__title">Women Development</h3></div>
             <div class="workcard__body">
-              <h3>Women Development</h3>
               <p>Care and support for women survivors of violence, inside the community itself.</p>
               <ul class="workcard__projects">
                 <li>Addressing GBV in Communities</li>
@@ -182,35 +191,35 @@
           <h2>Five projects, running today</h2>
         </div>
         <div class="projectgrid anim" data-group="proj">
-          <div class="projectcard" data-glow>
+          <div class="projectcard">
             <div class="projectcard__media"><img class="reveal-img" src="assets/img/clinic-1.jpg" alt="A woman being seen by staff at the Prayatn health clinic" width="1000" height="750" loading="lazy"><span class="projectcard__tag">Healthcare</span></div>
             <div class="projectcard__body">
               <h3>Swaasthya Kendra</h3>
               <p>Our community health centre &mdash; everyday care, within walking distance.</p>
             </div>
           </div>
-          <div class="projectcard" data-glow>
+          <div class="projectcard">
             <div class="projectcard__media"><img class="reveal-img" src="assets/img/clinic-2.jpg" alt="A school health awareness session, run in the classroom" width="800" height="1000" loading="lazy"><span class="projectcard__tag">Healthcare</span></div>
             <div class="projectcard__body">
               <h3>School Health Program</h3>
               <p>Check-ups, awareness and follow-up care, taken into the classroom.</p>
             </div>
           </div>
-          <div class="projectcard" data-glow>
+          <div class="projectcard">
             <div class="projectcard__media"><img class="reveal-img" src="assets/img/school-1.jpg" alt="Schoolchildren holding up the paper craft they have made" width="1000" height="750" loading="lazy"><span class="projectcard__tag">Education</span></div>
             <div class="projectcard__body">
               <h3>Seth Vidyalaya</h3>
               <p>Our school &mdash; for many children, the first in their family to attend one.</p>
             </div>
           </div>
-          <div class="projectcard" data-glow>
+          <div class="projectcard">
             <div class="projectcard__media"><img class="reveal-img" src="assets/img/school-2.jpg" alt="A meeting of parents and staff at Seth Vidyalaya" width="800" height="1000" loading="lazy"><span class="projectcard__tag">Education</span></div>
             <div class="projectcard__body">
               <h3>Scholarship Scheme</h3>
               <p>So that money is never the reason a promising student stops.</p>
             </div>
           </div>
-          <div class="projectcard" data-glow>
+          <div class="projectcard">
             <div class="projectcard__media"><img class="reveal-img" src="assets/img/women-1.jpg" alt="A Mahila Panchayat training session in progress" width="1000" height="750" loading="lazy"><span class="projectcard__tag">Women</span></div>
             <div class="projectcard__body">
               <h3>Addressing GBV in Communities</h3>
@@ -223,7 +232,7 @@
 
     <section class="section">
       <div class="wrap">
-        <figure class="quoteblock anim" data-glow data-group="quote" style="margin:0">
+        <figure class="quoteblock anim" data-group="quote" style="margin:0">
           <blockquote>Everyone should be an equal and active partner in the journey of development &mdash; not a beneficiary of someone else&rsquo;s.</blockquote>
           <cite>Prayatn &middot; working since 1992</cite>
         </figure>
@@ -237,14 +246,14 @@
           <h2>Ordinary days, over thirty years</h2>
         </div>
         <div class="strip anim" data-group="gal">
-          <div><img class="reveal-img" src="assets/img/gallery-1.jpg" alt="Schoolchildren holding up the paper craft they have made" width="800" height="800" loading="lazy"></div>
-          <div><img class="reveal-img" src="assets/img/gallery-2.jpg" alt="A doctor examining a schoolgirl at the Prayatn School Health Clinic" width="800" height="800" loading="lazy"></div>
-          <div><img class="reveal-img" src="assets/img/gallery-3.jpg" alt="Children in costume for the school&rsquo;s Dussehra celebration" width="800" height="800" loading="lazy"></div>
-          <div><img class="reveal-img" src="assets/img/gallery-4.jpg" alt="A legal awareness camp run by Prayatn under a marquee" width="800" height="800" loading="lazy"></div>
-          <div><img class="reveal-img" src="assets/img/gallery-5.jpg" alt="Children at work in the school computer room" width="800" height="800" loading="lazy"></div>
-          <div><img class="reveal-img" src="assets/img/gallery-6.jpg" alt="Schoolchildren on National Deworming Day, holding their tablets" width="800" height="800" loading="lazy"></div>
-          <div><img class="reveal-img" src="assets/img/gallery-7.jpg" alt="Seth Vidyalaya pupils outdoors with their certificates" width="800" height="800" loading="lazy"></div>
-          <div><img class="reveal-img" src="assets/img/gallery-8.jpg" alt="Women seated in a circle at a Prayatn meeting" width="800" height="800" loading="lazy"></div>
+          <div><img class="reveal-img" src="assets/img/gallery-51.jpg" alt="Schoolchildren holding up the paper craft they have made" width="640" height="640" loading="lazy"></div>
+          <div><img class="reveal-img" src="assets/img/gallery-5.jpg" alt="A doctor examining a schoolgirl at the Prayatn School Health Clinic" width="640" height="640" loading="lazy"></div>
+          <div><img class="reveal-img" src="assets/img/gallery-47.jpg" alt="Children in costume for the school&rsquo;s Dussehra celebration" width="640" height="640" loading="lazy"></div>
+          <div><img class="reveal-img" src="assets/img/gallery-29.jpg" alt="A legal awareness camp run by Prayatn under a marquee" width="640" height="640" loading="lazy"></div>
+          <div><img class="reveal-img" src="assets/img/gallery-40.jpg" alt="Children at work in the school computer room" width="640" height="640" loading="lazy"></div>
+          <div><img class="reveal-img" src="assets/img/gallery-21.jpg" alt="Schoolchildren on National Deworming Day, holding their tablets" width="640" height="640" loading="lazy"></div>
+          <div><img class="reveal-img" src="assets/img/gallery-49.jpg" alt="Seth Vidyalaya pupils outdoors with their certificates" width="640" height="640" loading="lazy"></div>
+          <div><img class="reveal-img" src="assets/img/gallery-77.jpg" alt="Women seated in a circle at a Prayatn meeting" width="640" height="640" loading="lazy"></div>
         </div>
       </div>
     </section>

@@ -19,7 +19,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
-<script>document.documentElement.classList.add('js-anim');</script>
+<script>
+(function (d) {
+  var r = d.documentElement;
+  r.classList.add('js-anim');
+  /* Hiding content before the animation runs is only safe if something is
+     guaranteed to un-hide it. If the behaviour script never arrives — a dropped
+     connection, a blocked file — nothing would, and the page would stay a blank
+     shell for good. So show everything after two seconds unless main.js has
+     taken over by then, and tell it not to animate if that has happened. */
+  setTimeout(function () {
+    if (!window.Prayatn) { window.__prayatnFailsafe = true; r.classList.remove('js-anim'); }
+  }, 2000);
+})(document);
+</script>
+<noscript><style>.js-anim .anim, .js-anim .reveal-img { opacity: 1 !important; clip-path: none !important; }</style></noscript>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -76,21 +90,21 @@
           <p>Every rupee goes into one of these. They are all within a few streets of each other, and you are welcome to come and see any of them.</p>
         </div>
         <div class="grid grid--3">
-          <div class="workcard anim" data-glow data-group="keeps">
+          <div class="workcard anim" data-group="keeps">
             <div class="workcard__media"><img class="reveal-img" src="assets/img/school-1.jpg" alt="Schoolchildren holding up the paper craft they have made" width="900" height="620" loading="lazy"></div>
             <div class="workcard__body">
               <h3>A school stays open</h3>
               <p>Seth Vidyalaya teaches children from the community, many of them the first in their family to attend school at all. Giving pays teachers, and puts books and uniforms in children&rsquo;s hands.</p>
             </div>
           </div>
-          <div class="workcard anim" data-glow data-group="keeps">
+          <div class="workcard anim" data-group="keeps">
             <div class="workcard__media"><img class="reveal-img" src="assets/img/clinic-1.jpg" alt="A woman being seen by staff at the Prayatn health clinic" width="900" height="620" loading="lazy"></div>
             <div class="workcard__body">
               <h3>A family can see a doctor</h3>
               <p>Swaasthya Kendra means everyday care is a short walk away rather than a lost day&rsquo;s wages. Giving pays for a doctor&rsquo;s time, medicines, and check-ups for school children.</p>
             </div>
           </div>
-          <div class="workcard anim" data-glow data-group="keeps">
+          <div class="workcard anim" data-group="keeps">
             <div class="workcard__media"><img class="reveal-img" src="assets/img/women-1.jpg" alt="A Mahila Panchayat training session in progress" width="900" height="620" loading="lazy"></div>
             <div class="workcard__body">
               <h3>A woman has somewhere to turn</h3>
