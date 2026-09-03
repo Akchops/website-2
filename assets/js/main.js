@@ -404,44 +404,8 @@
     setupReveals(document);
   }
 
-  /* =====================================================================
-     Hover glow — a light that tracks the cursor around the edge of a box
-     ===================================================================== */
-  (function () {
-    if (!window.matchMedia('(hover: hover)').matches) return;
-    var frame = null;
-    document.addEventListener('pointermove', function (e) {
-      var box = e.target.closest('[data-glow]');
-      if (!box || frame) return;
-      frame = requestAnimationFrame(function () {
-        frame = null;
-        var r = box.getBoundingClientRect();
-        box.style.setProperty('--glow-x', ((e.clientX - r.left) / r.width * 100) + '%');
-        box.style.setProperty('--glow-y', ((e.clientY - r.top) / r.height * 100) + '%');
-      });
-    }, { passive: true });
-  })();
 
   /* ------------------------------------------------------------- counters */
-  var counters = document.querySelectorAll('[data-count]');
-  if (counters.length) {
-    var setValue = function (el, value) {
-      el.textContent = Math.round(value).toLocaleString('en-IN') + (el.dataset.suffix || '');
-    };
-    Array.prototype.forEach.call(counters, function (el) {
-      var target = Number(el.dataset.count);
-      if (!target) return;
-      if (!canAnimate) { setValue(el, target); return; }
-      setValue(el, 0);
-      var running = false;
-      observe(el, function () {
-        if (running) return;
-        running = true;
-        M.animate(0, target, { duration: 1.4, ease: EASE, onUpdate: function (v) { setValue(el, v); } });
-      }, function () { running = false; setValue(el, 0); });
-    });
-  }
-
   /* ------------------------------------------------------------- lightbox */
   var lightbox = document.querySelector('.lightbox');
   var lightboxImg = lightbox && lightbox.querySelector('img');
