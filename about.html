@@ -207,16 +207,45 @@
           <h2>Five organisations stand behind this work</h2>
           <p class="lede">Prayatn is small, and what it does each year it does not do alone. These are the organisations whose backing keeps the school, the health centre and the work with women going.</p>
         </div>
-        <ul class="partners anim" data-group="partners">
-          <!-- TODO: the line under each name is for what that organisation supports —
-               "the school library", "medicines for the health centre", "printing".
-               Left empty on purpose: we do not know, and will not guess. One filled in
-               is worth more than five names on their own. Deliberately not links. -->
-          <li class="partner"><b>Seth Foundation</b><span></span></li>
-          <li class="partner"><b>Azim Premji Foundation</b><span></span></li>
-          <li class="partner"><b>Samrat Offset Pvt Ltd</b><span></span></li>
-          <li class="partner"><b>United Way of Delhi</b><span></span></li>
-          <li class="partner"><b>Sleep Well Foundation</b><span></span></li>
+        <ul class="partnerwall anim" data-group="partners">
+          <!-- TODO 1: the mark on each tile is the organisation's initials, standing in
+               until a logo is to hand. Put the file in assets/img/ and swap the span for
+               <img class="partner__mark" src="assets/img/partner-seth.png" alt="">.
+               TODO 2: partner__note is for what that organisation supports — "the school
+               library", "medicines for the health centre", "printing". Left empty on
+               purpose: we do not know, and will not guess. One filled in is worth more
+               than five names on their own. The names are deliberately not links. -->
+          <li class="partner">
+            <span class="partner__mark" aria-hidden="true">SF</span>
+            <b>Seth Foundation</b>
+            <span class="partner__note"></span>
+          </li>
+          <li class="partner">
+            <span class="partner__mark" aria-hidden="true">APF</span>
+            <b>Azim Premji Foundation</b>
+            <span class="partner__note"></span>
+          </li>
+          <li class="partner">
+            <span class="partner__mark" aria-hidden="true">SO</span>
+            <b>Samrat Offset Pvt Ltd</b>
+            <span class="partner__note"></span>
+          </li>
+          <li class="partner">
+            <span class="partner__mark" aria-hidden="true">UW</span>
+            <b>United Way of Delhi</b>
+            <span class="partner__note"></span>
+          </li>
+          <li class="partner">
+            <span class="partner__mark" aria-hidden="true">SW</span>
+            <b>Sleep Well Foundation</b>
+            <span class="partner__note"></span>
+          </li>
+          <li class="partner partner--invite">
+            <span class="partner__mark" aria-hidden="true">+</span>
+            <b>Could your organisation be here?</b>
+            <span class="partner__note">Project funding, CSR partnerships, employee volunteering.</span>
+            <a class="arrow-link" href="get-involved.html#write">Talk to us about partnering <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </li>
         </ul>
       </div>
     </section>
