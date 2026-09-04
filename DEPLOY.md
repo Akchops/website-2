@@ -105,14 +105,29 @@ following an old link still lands somewhere sensible in the meantime.
 
 ## Setting up donations
 
-The Donate page is built and in the menu, but no payment details are in it yet
-— on purpose. Nothing on that page is invented: no account number, no UPI ID,
-no payment link. Until real details are added, the page asks people to call or
-email instead, which is true and works today.
+The Donate page now carries the trust's own giving details, taken from Prayatn's
+printed brochure — a bank transfer and a cheque, under **Ways to give**:
 
-Everything lives in one place: the `DONATION` block at the top of the generator
-(and, if you edit the HTML directly, on `donate.html`). Fill in whatever exists
-and the page builds itself around it. Anything left blank is simply not shown.
+| Detail | What is on the page |
+| --- | --- |
+| Account name | Prayatn |
+| Account number | 0156000100467932 |
+| IFSC code | PUNB0015600 |
+| Bank | Punjab National Bank, Kalkaji Branch |
+| Branch address | Kalkaji, New Delhi – 110019 |
+| Cheques in favour of | Prayatn, New Delhi |
+
+**Check every character of these against a recent bank statement before the site
+goes live.** They came from a brochure, which may be out of date, and a wrong
+digit sends donations to a stranger.
+
+What is still missing is giving by card, netbanking or UPI: there is no payment
+link and no UPI ID, and the page says so plainly rather than showing a button
+that goes nowhere. Nothing on that page is invented.
+
+To change any of it, edit the `giveway` cards in the **Ways to give** section of
+`donate.html` (or the `DONATION` block at the top of the generator, if you are
+regenerating the site). Anything left blank is simply not shown.
 
 ### Getting a payment link that works
 
@@ -151,8 +166,9 @@ not to hand.
 ### Before you publish real details
 
 Check every character of the account number, IFSC and UPI ID against a bank
-statement — not from memory, and not from an old document. A wrong digit sends
-donations to a stranger.
+statement — not from memory, and not from an old document. That includes the
+account number and IFSC already on the Donate page, which came from the
+brochure. A wrong digit sends donations to a stranger.
 
 ---
 

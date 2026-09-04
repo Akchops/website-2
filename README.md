@@ -62,8 +62,10 @@ marked in the HTML with a comment explaining what to put there. The main ones:
    directory listings, not from Prayatn directly — please check them.
 5. **Trustee names and photos** on `trustees.html`, if the board is happy to be
    listed publicly.
-6. **Donations.** `get-involved.html` has a marked spot for a UPI ID, bank
-   details or a payment link when you are ready to accept money online.
+6. **Donations.** `donate.html` carries the trust's bank account and cheque
+   details from the printed brochure — check them against a bank statement
+   before the site goes live. A UPI ID and an online payment link can be added
+   there too; see `DEPLOY.md`.
 
 ## Making the forms actually send email
 

@@ -94,6 +94,7 @@ strong { font-weight: 650; color: var(--ink); }
 .section--stone { background: var(--stone-50); }
 .section--ink { background: var(--green-900); color: #C8D8D0; }
 .section--ink h2, .section--ink h3 { color: #fff; }
+.section--ink .section-head p, .section--ink .lede { color: #A9C4B8; }
 .section--ruled { border-top: 1px solid var(--rule); }
 
 .grid { display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); }
@@ -889,22 +890,20 @@ strong { font-weight: 650; color: var(--ink); }
 .giveway h3 { margin-bottom: .5rem; }
 .giveway p { color: var(--muted); font-size: .98rem; }
 .giveway .btn { margin-top: .4rem; }
-.giveway__code {
+/* Scoped past `.giveway p`, which would otherwise win on specificity when the
+   code sits in a paragraph. */
+.giveway .giveway__code {
   font-family: var(--display); font-size: 1.15rem; font-weight: 650; color: var(--green-900);
   background: var(--stone-50); border: 1px solid var(--rule); border-radius: var(--r-sm);
   padding: .7rem .9rem; margin: .3rem 0 1rem; user-select: all; word-break: break-all;
 }
-.giveway__note { font-size: .85rem; color: var(--muted); margin-top: .9rem; margin-bottom: 0; }
+.giveway .giveway__note { font-size: .85rem; color: var(--muted); margin-top: .9rem; margin-bottom: 0; }
+.giveway .deflist { margin-bottom: 0; }
 .deflist--tight > div { padding-block: .6rem; }
 .deflist--tight dd { font-family: var(--display); font-weight: 600; word-break: break-word; }
-
-/* a giving card that is not wired up yet — impossible to mistake for the real thing */
-.giveway--placeholder { border-style: dashed; }
-.giveway__placeholder {
-  margin: 1rem 0 0; padding: .7rem .85rem; border-radius: var(--r-sm);
-  background: var(--saffron-50); border: 1px solid var(--saffron);
-  font-family: var(--display); font-size: .82rem; color: #7A4405;
-}
+/* Inside a card there is no room for the 220px label column the wide deflist
+   uses, so the label sits above the value at every width. */
+.giveway .deflist > div { grid-template-columns: 1fr; gap: .1rem; }
 
 /* ---------- icon card ----------
    Used for the ways to help and the governance bodies. This was left without
