@@ -188,7 +188,7 @@ strong { font-weight: 650; color: var(--ink); }
 .nav { display: flex; align-items: center; gap: .15rem; }
 .nav__link {
   position: relative; display: inline-flex; align-items: center; gap: .3rem;
-  padding: .6rem .8rem; font-family: var(--display); font-size: 1.15rem; font-weight: 550;
+  padding: .6rem .85rem; font-family: var(--display); font-size: 1.45rem; font-weight: 550;
   white-space: nowrap;   /* at this size "About Us" would otherwise break in two */
   color: var(--ink-2); text-decoration: none; background: none; border: 0; cursor: pointer;
   transition: color .16s ease;
@@ -196,7 +196,7 @@ strong { font-weight: 650; color: var(--ink); }
 .nav__link:hover { color: var(--green-700); }
 .nav__link[aria-current="page"] { color: var(--green-700); font-weight: 650; }
 .nav__link[aria-current="page"]::after {
-  content: ""; position: absolute; left: .8rem; right: .8rem; bottom: -1px; height: 2px; background: var(--saffron);
+  content: ""; position: absolute; left: .85rem; right: .85rem; bottom: -1px; height: 2px; background: var(--saffron);
 }
 .nav__chevron { width: 11px; height: 11px; opacity: .6; transition: transform .2s ease; }
 .nav__item { position: relative; }
@@ -219,7 +219,12 @@ strong { font-weight: 650; color: var(--ink); }
 .nav__menu small { display: block; font-family: var(--display); color: var(--muted); font-size: .77rem; font-weight: 400; margin-top: .12rem; }
 
 .header-cta { display: inline-flex; gap: .55rem; align-items: center; }
-.header-cta > .btn { font-size: 1.02rem; padding: .88rem 1.4rem; white-space: nowrap; }
+/* Two solid buttons side by side fought each other, and the orange block was
+   the loudest thing in the header. Donate stays solid as the single clear
+   action; Get Involved sits quietly beside it as an outline. */
+.header-cta > .btn { font-size: 1rem; padding: .72rem 1.25rem; white-space: nowrap; }
+.header-cta > .btn--accent { background: none; color: var(--green-900); border-color: var(--rule); }
+.header-cta > .btn--accent:hover { background: var(--stone-50); border-color: var(--green-900); color: var(--green-900); }
 .nav-toggle {
   display: none; width: 44px; height: 44px; border-radius: var(--r-sm);
   border: 1px solid var(--rule); background: var(--white); cursor: pointer;
@@ -231,7 +236,7 @@ strong { font-weight: 650; color: var(--ink); }
 .nav-toggle[aria-expanded="true"] .icon-close { display: block; }
 .nav__cta { display: none; }
 
-@media (max-width: 1180px) {
+@media (max-width: 1279px) {
   .nav-toggle { display: inline-flex; }
   .header-cta > .btn { display: none; }
 
