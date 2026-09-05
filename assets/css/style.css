@@ -474,60 +474,124 @@ strong { font-weight: 650; color: var(--ink); }
 /* ---------- partners ----------
    Names, not buttons. These are not links, so nothing here may look or behave
    as though it can be clicked: no box, no hover lift, no pointer cursor. */
+/* ---------- partner band ----------
+   The section carries a photograph of a Seth Vidyalaya prize day rather than a
+   flat colour: partners shown at work, not listed in the abstract. Everything
+   above it is layered on z-index so the tiles stay legible over any frame. */
+.partnerband {
+  position: relative; isolation: isolate; overflow: hidden;
+  background: var(--green-900); color: #C8D8D0;
+  padding-block: clamp(3.5rem, 7vw, 6rem);
+}
+.partnerband__media { position: absolute; inset: 0; z-index: -3; }
+.partnerband__media img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%;
+  filter: saturate(.62) contrast(1.04);
+}
+/* Deep green wash: enough of the photograph survives to give the band depth,
+   not enough to fight the tiles sitting on it. */
+.partnerband::before {
+  content: ""; position: absolute; inset: 0; z-index: -2; pointer-events: none;
+  background:
+    linear-gradient(105deg, rgba(6, 32, 22, .96) 0%, rgba(6, 32, 22, .88) 42%, rgba(6, 32, 22, .72) 100%),
+    linear-gradient(to bottom, rgba(6, 32, 22, .9) 0%, rgba(6, 32, 22, .35) 40%, rgba(6, 32, 22, .92) 100%);
+}
+/* Two slow-drifting lights, one saffron and one green, so the ground is alive
+   rather than a static slab. Purely decorative — it sits behind everything. */
+.partnerband__aurora {
+  position: absolute; inset: -20%; z-index: -1; pointer-events: none; opacity: .55;
+  background:
+    radial-gradient(38% 44% at 18% 26%, rgba(240, 162, 2, .34) 0%, rgba(240, 162, 2, 0) 68%),
+    radial-gradient(42% 48% at 82% 74%, rgba(26, 122, 84, .5) 0%, rgba(26, 122, 84, 0) 70%);
+  animation: partnerdrift 26s ease-in-out infinite alternate;
+}
+@keyframes partnerdrift {
+  from { transform: translate3d(-3%, -2%, 0) scale(1); }
+  to   { transform: translate3d(3%, 2%, 0) scale(1.12); }
+}
+.partnerband__inner { position: relative; }
+.partnerband .section-head p, .partnerband .lede { color: #BCD3C8; }
+.partnerband h2 { color: #fff; }
+.partnerband .label { color: var(--saffron-bright); }
+
 .partnerwall {
   /* Two columns on a phone, three above it. Six tiles divide evenly into both,
-     which five never did. One tall column of wide tiles read as an awkward
-     stack on a narrow screen, and it is a wall — it should look like one. */
+     which five never did. */
   list-style: none; margin: 0; padding: 0;
-  display: grid; gap: clamp(.6rem, 1.4vw, 1rem);
+  display: grid; gap: clamp(.6rem, 1.4vw, 1.05rem);
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: start;
+  align-items: stretch;
 }
 @media (min-width: 800px) { .partnerwall { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
-/* Light tiles, not tinted panels. Barely-there surfaces on green read as the
-   background with an outline; a white card reads as an object sitting on it —
-   and white is the ground a real logo needs, since most arrive as dark artwork
-   on a transparent field. */
+/* Frosted glass over the photograph — light enough that a dark logo reads on
+   it, translucent enough that the picture behind still shows through. */
 .partner {
-  display: flex; flex-direction: column; align-items: center; text-align: center;
-  gap: .7rem; padding: clamp(1rem, 2.2vw, 1.6rem) clamp(.75rem, 1.8vw, 1.4rem);
-  background: var(--white); border-radius: var(--r-md);
-  border: 1px solid transparent;
-  transition: transform .2s ease, box-shadow .2s ease;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: .65rem;
+  padding: clamp(1.15rem, 2.4vw, 1.75rem) clamp(.8rem, 1.8vw, 1.4rem);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .93);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, .55);
+  box-shadow: 0 18px 40px -20px rgba(0, 0, 0, .75);
+  transition: transform .28s cubic-bezier(.2, .7, .3, 1), box-shadow .28s ease, border-color .28s ease;
 }
-/* Sized as a box rather than as text, so dropping in a logo file changes what
+/* A light sweeps across the tile on approach. Sits above the tile face but
+   below nothing else, so it never touches legibility. */
+.partner::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, .75) 50%, transparent 62%);
+  transform: translateX(-120%); opacity: 0;
+  transition: transform .7s ease, opacity .3s ease;
+}
+/* Sized as a box rather than as text, so dropping a logo file in changes what
    is inside it and never what it does to the layout. */
 .partner__mark {
   display: flex; align-items: center; justify-content: center;
-  width: 100%; height: 2.75rem; flex: none;
+  width: 100%; height: 2.6rem; flex: none;
   object-fit: contain; object-position: center;
   color: var(--green-700);
   font-family: var(--display); font-weight: 700;
-  font-size: clamp(1.15rem, 3vw, 1.5rem); letter-spacing: .06em;
+  font-size: clamp(1.1rem, 2.9vw, 1.45rem); letter-spacing: .06em;
 }
 .partner b {
   font-family: var(--display); font-weight: 600; color: var(--ink);
-  font-size: clamp(.88rem, 2.1vw, 1.02rem); line-height: 1.3;
+  font-size: clamp(.86rem, 2.1vw, 1rem); line-height: 1.3;
 }
 /* Stays out of the way until there is something to put in it, so an unfilled
    wall still looks finished rather than half-built. */
-.partner__note { font-size: .85rem; line-height: 1.5; color: var(--muted); }
+.partner__note { font-size: .84rem; line-height: 1.5; color: var(--muted); }
 .partner__note:empty { display: none; }
 
-/* The sixth tile is the opening: dashed and unfilled against the five solid
-   ones, so the gap is the point rather than an oversight. */
+/* The sixth tile is the opening: unglazed and dashed against the five solid
+   ones, so the gap reads as the point rather than an oversight. */
 .partner--invite {
-  background: none; border: 1px dashed rgba(240, 162, 2, .5);
-  justify-content: center;
+  background: rgba(255, 255, 255, .06);
+  border: 1px dashed rgba(240, 162, 2, .6);
+  box-shadow: none;
 }
 .partner--invite .partner__mark { color: var(--saffron-bright); }
 .partner--invite b { color: #fff; }
-.partner--invite .partner__note { color: #A9C4B8; }
+.partner--invite .partner__note { color: #BCD3C8; }
 .partner--invite .arrow-link { color: var(--saffron-bright); }
+.partner--invite::after { display: none; }
+
 @media (hover: hover) {
-  .partner:not(.partner--invite):hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(0, 0, 0, .28); }
-  .partner--invite:hover { border-color: var(--saffron-bright); }
+  .partner:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 26px 50px -18px rgba(0, 0, 0, .8);
+    border-color: rgba(240, 162, 2, .75);
+  }
+  .partner:hover::after { transform: translateX(120%); opacity: 1; }
+  .partner--invite:hover { background: rgba(255, 255, 255, .1); border-color: var(--saffron-bright); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .partnerband__aurora { animation: none; }
+  .partner, .partner::after { transition: none; }
+  .partner:hover { transform: none; }
 }
 
 .footer-legal { display: flex; gap: 1.25rem; }
