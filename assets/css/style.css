@@ -183,19 +183,20 @@ strong { font-weight: 650; color: var(--ink); }
 /* the mark is dark ink; on the green footer it has to be reversed out to white */
 .site-footer .brand__mark { height: 44px; filter: brightness(0) invert(1); }
 .brand__name { font-family: var(--display); font-size: 1.72rem; font-weight: 700; line-height: 1; letter-spacing: -.025em; color: var(--green-900); }
-.brand__sub { display: block; font-family: var(--display); font-size: .7rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-top: .3rem; }
+.brand__sub { display: block; white-space: nowrap; font-family: var(--display); font-size: .7rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-top: .3rem; }
 
-.nav { display: flex; align-items: center; gap: .1rem; }
+.nav { display: flex; align-items: center; gap: .15rem; }
 .nav__link {
   position: relative; display: inline-flex; align-items: center; gap: .3rem;
-  padding: .55rem .7rem; font-family: var(--display); font-size: .93rem; font-weight: 550;
+  padding: .6rem .8rem; font-family: var(--display); font-size: 1.15rem; font-weight: 550;
+  white-space: nowrap;   /* at this size "About Us" would otherwise break in two */
   color: var(--ink-2); text-decoration: none; background: none; border: 0; cursor: pointer;
   transition: color .16s ease;
 }
 .nav__link:hover { color: var(--green-700); }
 .nav__link[aria-current="page"] { color: var(--green-700); font-weight: 650; }
 .nav__link[aria-current="page"]::after {
-  content: ""; position: absolute; left: .7rem; right: .7rem; bottom: -1px; height: 2px; background: var(--saffron);
+  content: ""; position: absolute; left: .8rem; right: .8rem; bottom: -1px; height: 2px; background: var(--saffron);
 }
 .nav__chevron { width: 11px; height: 11px; opacity: .6; transition: transform .2s ease; }
 .nav__item { position: relative; }
@@ -218,6 +219,7 @@ strong { font-weight: 650; color: var(--ink); }
 .nav__menu small { display: block; font-family: var(--display); color: var(--muted); font-size: .77rem; font-weight: 400; margin-top: .12rem; }
 
 .header-cta { display: inline-flex; gap: .55rem; align-items: center; }
+.header-cta > .btn { font-size: 1.02rem; padding: .88rem 1.4rem; white-space: nowrap; }
 .nav-toggle {
   display: none; width: 44px; height: 44px; border-radius: var(--r-sm);
   border: 1px solid var(--rule); background: var(--white); cursor: pointer;
@@ -229,7 +231,7 @@ strong { font-weight: 650; color: var(--ink); }
 .nav-toggle[aria-expanded="true"] .icon-close { display: block; }
 .nav__cta { display: none; }
 
-@media (max-width: 980px) {
+@media (max-width: 1180px) {
   .nav-toggle { display: inline-flex; }
   .header-cta > .btn { display: none; }
 
