@@ -520,82 +520,89 @@ strong { font-weight: 650; color: var(--ink); }
 .partnerband .label { color: var(--saffron-bright); }
 
 .partnerwall {
-  /* Two columns on a phone, three above it. Six tiles divide evenly into both,
-     which five never did. */
+  /* One column on a phone, two from 700px, three on a wide screen. Each card
+     now carries a paragraph, so cramming two into a narrow phone would leave
+     four-word lines. */
   list-style: none; margin: 0; padding: 0;
-  display: grid; gap: clamp(.6rem, 1.4vw, 1.05rem);
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: stretch;
+  display: grid; gap: clamp(.75rem, 1.5vw, 1.15rem);
+  grid-template-columns: 1fr;
 }
-@media (min-width: 800px) { .partnerwall { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 700px)  { .partnerwall { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1040px) { .partnerwall { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
-/* Frosted glass over the photograph — light enough that a dark logo reads on
-   it, translucent enough that the picture behind still shows through. */
+/* Dark glass over the photograph, not white panels. A white card on a picture
+   is a hole punched in it; smoked glass keeps the band continuous and lets the
+   photograph carry through the whole section. */
 .partner {
   position: relative; overflow: hidden;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; gap: .65rem;
-  padding: clamp(1.15rem, 2.4vw, 1.75rem) clamp(.8rem, 1.8vw, 1.4rem);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, .93);
-  -webkit-backdrop-filter: blur(14px) saturate(1.2);
-  backdrop-filter: blur(14px) saturate(1.2);
-  border: 1px solid rgba(255, 255, 255, .55);
-  box-shadow: 0 18px 40px -20px rgba(0, 0, 0, .75);
-  transition: transform .28s cubic-bezier(.2, .7, .3, 1), box-shadow .28s ease, border-color .28s ease;
+  display: flex; flex-direction: column; align-items: flex-start; gap: .55rem;
+  padding: clamp(1.4rem, 2.6vw, 1.9rem);
+  border-radius: 16px;
+  background: linear-gradient(158deg, rgba(10, 48, 34, .82) 0%, rgba(6, 30, 21, .88) 100%);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  backdrop-filter: blur(18px) saturate(1.25);
+  border: 1px solid rgba(255, 255, 255, .16);
+  box-shadow: 0 20px 44px -24px rgba(0, 0, 0, .85);
+  transition: transform .3s cubic-bezier(.2, .7, .3, 1), box-shadow .3s ease, border-color .3s ease;
 }
-/* A light sweeps across the tile on approach. Sits above the tile face but
-   below nothing else, so it never touches legibility. */
-.partner::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, .75) 50%, transparent 62%);
-  transform: translateX(-120%); opacity: 0;
-  transition: transform .7s ease, opacity .3s ease;
+/* A hairline of saffron along the top edge, drawn from the left on approach —
+   the one moving part, so it reads as a highlight rather than a light show. */
+.partner::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--saffron-bright), rgba(240, 162, 2, 0));
+  transform: scaleX(0); transform-origin: left; transition: transform .45s ease;
 }
-/* Sized as a box rather than as text, so dropping a logo file in changes what
-   is inside it and never what it does to the layout. */
-.partner__mark {
-  display: flex; align-items: center; justify-content: center;
-  width: 100%; height: 2.6rem; flex: none;
-  object-fit: contain; object-position: center;
-  color: var(--green-700);
-  font-family: var(--display); font-weight: 700;
-  font-size: clamp(1.1rem, 2.9vw, 1.45rem); letter-spacing: .06em;
+/* The index sits behind the name as a ghost numeral. It replaces the initials,
+   which read as a logo that had not loaded. */
+.partner__num {
+  position: absolute; top: -.35em; right: .08em; pointer-events: none;
+  font-family: var(--display); font-weight: 700; font-size: 6.5rem; line-height: 1;
+  color: rgba(240, 162, 2, .13); letter-spacing: -.04em;
+}
+/* Logos arrive on their own white plate, because most are dark artwork on a
+   transparent field and would vanish into the glass. */
+.partner__logo {
+  width: auto; max-width: 100%; height: 2.6rem; object-fit: contain; object-position: left center;
+  background: var(--white); border-radius: var(--r-sm);
+  padding: .45rem .6rem; margin-bottom: .35rem;
 }
 .partner b {
-  font-family: var(--display); font-weight: 600; color: var(--ink);
-  font-size: clamp(.86rem, 2.1vw, 1rem); line-height: 1.3;
+  position: relative;
+  font-family: var(--display); font-weight: 650; color: #fff;
+  font-size: clamp(1.08rem, 1.6vw, 1.28rem); line-height: 1.25; letter-spacing: -.01em;
 }
-/* Stays out of the way until there is something to put in it, so an unfilled
-   wall still looks finished rather than half-built. */
-.partner__note { font-size: .84rem; line-height: 1.5; color: var(--muted); }
+.partner b::after {
+  content: ""; display: block; width: 2.2rem; height: 2px; margin-top: .7rem;
+  background: var(--saffron-bright); border-radius: 2px;
+}
+.partner__note {
+  margin: 0; position: relative;
+  font-size: .93rem; line-height: 1.62; color: #B6CFC3;
+}
 .partner__note:empty { display: none; }
 
-/* The sixth tile is the opening: unglazed and dashed against the five solid
+/* The sixth card is the opening: dashed and unglazed against the five solid
    ones, so the gap reads as the point rather than an oversight. */
 .partner--invite {
-  background: rgba(255, 255, 255, .06);
-  border: 1px dashed rgba(240, 162, 2, .6);
+  background: rgba(255, 255, 255, .04);
+  border: 1px dashed rgba(240, 162, 2, .55);
   box-shadow: none;
 }
-.partner--invite .partner__mark { color: var(--saffron-bright); }
-.partner--invite b { color: #fff; }
-.partner--invite .partner__note { color: #BCD3C8; }
-.partner--invite .arrow-link { color: var(--saffron-bright); }
-.partner--invite::after { display: none; }
+.partner--invite .partner__num { color: rgba(240, 162, 2, .22); font-size: 5rem; }
+.partner--invite .arrow-link { color: var(--saffron-bright); margin-top: .35rem; }
 
 @media (hover: hover) {
   .partner:hover {
     transform: translateY(-6px);
-    box-shadow: 0 26px 50px -18px rgba(0, 0, 0, .8);
-    border-color: rgba(240, 162, 2, .75);
+    border-color: rgba(240, 162, 2, .5);
+    box-shadow: 0 30px 56px -22px rgba(0, 0, 0, .9);
   }
-  .partner:hover::after { transform: translateX(120%); opacity: 1; }
-  .partner--invite:hover { background: rgba(255, 255, 255, .1); border-color: var(--saffron-bright); }
+  .partner:hover::before { transform: scaleX(1); }
+  .partner--invite:hover { background: rgba(255, 255, 255, .08); border-color: var(--saffron-bright); }
 }
 @media (prefers-reduced-motion: reduce) {
   .partnerband__aurora { animation: none; }
-  .partner, .partner::after { transition: none; }
+  .partner, .partner::before { transition: none; }
   .partner:hover { transform: none; }
 }
 
