@@ -475,52 +475,59 @@ strong { font-weight: 650; color: var(--ink); }
    Names, not buttons. These are not links, so nothing here may look or behave
    as though it can be clicked: no box, no hover lift, no pointer cursor. */
 .partnerwall {
-  /* A partner wall, not a list. Names on their own — at any type size — gave the
-     section nothing to look at, so each organisation gets a tile with a mark on
-     it, and the sixth tile invites the next one in. Six also divides evenly into
-     two and three columns, which five never did. */
+  /* Two columns on a phone, three above it. Six tiles divide evenly into both,
+     which five never did. One tall column of wide tiles read as an awkward
+     stack on a narrow screen, and it is a wall — it should look like one. */
   list-style: none; margin: 0; padding: 0;
-  display: grid; gap: clamp(.8rem, 1.5vw, 1.1rem);
-  grid-template-columns: 1fr;
-  /* tiles hug their content: with the notes still empty, stretching them to the
-     tallest in the row would reopen the dead space this layout is meant to close */
+  display: grid; gap: clamp(.6rem, 1.4vw, 1rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: start;
 }
-@media (min-width: 620px) { .partnerwall { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 980px) { .partnerwall { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 800px) { .partnerwall { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
+/* Light tiles, not tinted panels. Barely-there surfaces on green read as the
+   background with an outline; a white card reads as an object sitting on it —
+   and white is the ground a real logo needs, since most arrive as dark artwork
+   on a transparent field. */
 .partner {
-  display: flex; flex-direction: column; align-items: flex-start;
-  gap: .85rem; padding: clamp(1.3rem, 2.4vw, 1.8rem);
-  background: rgba(255, 255, 255, .045);
-  border: 1px solid rgba(255, 255, 255, .14); border-radius: var(--r-md);
-  transition: border-color .2s ease, background-color .2s ease;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: .7rem; padding: clamp(1rem, 2.2vw, 1.6rem) clamp(.75rem, 1.8vw, 1.4rem);
+  background: var(--white); border-radius: var(--r-md);
+  border: 1px solid transparent;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
-/* The mark is the initials set in the site's own type — a stand-in for a logo,
-   never dressed up as one. Replaced by an <img> of the same class when a real
-   logo file arrives, which is why the box is sized rather than the text. */
+/* Sized as a box rather than as text, so dropping in a logo file changes what
+   is inside it and never what it does to the layout. */
 .partner__mark {
   display: flex; align-items: center; justify-content: center;
-  width: 3.15rem; height: 3.15rem; flex: none;
-  border-radius: var(--r-sm); object-fit: contain;
-  background: rgba(240, 162, 2, .13); border: 1px solid rgba(240, 162, 2, .4);
-  color: var(--saffron-bright);
-  font-family: var(--display); font-weight: 700; font-size: 1rem; letter-spacing: .04em;
+  width: 100%; height: 2.75rem; flex: none;
+  object-fit: contain; object-position: center;
+  color: var(--green-700);
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(1.15rem, 3vw, 1.5rem); letter-spacing: .06em;
 }
 .partner b {
-  font-family: var(--display); font-weight: 600; color: #fff;
-  font-size: clamp(1.05rem, 1.5vw, 1.22rem); line-height: 1.3;
+  font-family: var(--display); font-weight: 600; color: var(--ink);
+  font-size: clamp(.88rem, 2.1vw, 1.02rem); line-height: 1.3;
 }
 /* Stays out of the way until there is something to put in it, so an unfilled
    wall still looks finished rather than half-built. */
-.partner__note { font-size: .93rem; line-height: 1.55; color: #A9C4B8; }
+.partner__note { font-size: .85rem; line-height: 1.5; color: var(--muted); }
 .partner__note:empty { display: none; }
 
-/* The sixth tile: an opening, marked out from the five by a dashed edge. */
-.partner--invite { background: none; border-style: dashed; border-color: rgba(240, 162, 2, .45); }
-.partner--invite .arrow-link { color: var(--saffron-bright); margin-top: .1rem; }
+/* The sixth tile is the opening: dashed and unfilled against the five solid
+   ones, so the gap is the point rather than an oversight. */
+.partner--invite {
+  background: none; border: 1px dashed rgba(240, 162, 2, .5);
+  justify-content: center;
+}
+.partner--invite .partner__mark { color: var(--saffron-bright); }
+.partner--invite b { color: #fff; }
+.partner--invite .partner__note { color: #A9C4B8; }
+.partner--invite .arrow-link { color: var(--saffron-bright); }
 @media (hover: hover) {
-  .partner:hover { border-color: rgba(240, 162, 2, .55); background: rgba(255, 255, 255, .07); }
+  .partner:not(.partner--invite):hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(0, 0, 0, .28); }
+  .partner--invite:hover { border-color: var(--saffron-bright); }
 }
 
 .footer-legal { display: flex; gap: 1.25rem; }
